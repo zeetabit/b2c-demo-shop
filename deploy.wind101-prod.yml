@@ -108,19 +108,15 @@ groups:
                 endpoints:
                     www.us.wind.cloud101.cloud.spryker.toys:
                         store: US
-                        <<: *frontend-auth
                     www.ca.wind.cloud101.cloud.spryker.toys:
                         store: CA
-                        <<: *frontend-auth
             Zed:
                 application: zed
                 endpoints:
                     zed.us.wind.cloud101.cloud.spryker.toys:
                         store: US
-                        <<: *frontend-auth
                     zed.ca.wind.cloud101.cloud.spryker.toys:
                         store: CA
-                        <<: *frontend-auth
             Glue:
                 application: glue
                 endpoints:

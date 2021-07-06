@@ -44,14 +44,8 @@ sections:
         propel-tables-drop:
             command: "vendor/bin/console propel:tables:drop -vvv --no-ansi"
 
-        propel-diff:
-            command: "vendor/bin/console propel:diff -vvv --no-ansi"
-
         propel-migrate:
             command: "vendor/bin/console propel:migrate -vvv --no-ansi"
-
-        propel-migration-cleanup:
-            command: "vendor/bin/console propel:migration:delete -vvv --no-ansi"
 
         init-database:
             command: "vendor/bin/console setup:init-db -vvv --no-ansi"
