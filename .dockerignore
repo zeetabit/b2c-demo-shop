@@ -18,8 +18,6 @@ node_modules
 
 /src/Orm/Zed/*/Persistence/Base
 /src/Orm/Zed/*/Persistence/Map
-/src/Orm/Propel/*
-!/src/Orm/Propel/.gitkeep
 
 /src/Generated
 /public/Yves/assets
