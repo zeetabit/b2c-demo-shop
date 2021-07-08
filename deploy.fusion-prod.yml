@@ -20,6 +20,10 @@ image:
     environment:
         SPRYKER_DEFAULT_STORE: "NZ"
         SPRYKER_ACTIVE_STORES: "NZ,AU"
+        SPRYKER_HOOK_BEFORE_DEPLOY: "vendor/bin/install -r OCEANIA/pre-deploy -vvv"
+        SPRYKER_HOOK_AFTER_DEPLOY: "true"
+        SPRYKER_HOOK_INSTALL: "vendor/bin/install -r OCEANIA/production --no-ansi -vvv"
+        SPRYKER_HOOK_DESTRUCTIVE_INSTALL: "vendor/bin/install -r OCEANIA/destructive --no-ansi -vvv"
 composer:
     mode: --no-dev
     autoload: --classmap-authoritative

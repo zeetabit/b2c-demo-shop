@@ -4,7 +4,8 @@ env:
 command-timeout: 1200
 
 stores:
-    - US
+    - NZ
+    - AU
 
 sections:
     clean-oms:
