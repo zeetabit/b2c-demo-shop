@@ -87,7 +87,6 @@ npm-debug.log
 /src/Orm/Propel/Schema
 /src/Orm/Propel/Sql
 /src/Orm/Propel/Migration_pgsql/
-/src/Orm/Propel/Migration_mysql/
 
 # tools
 composer.phar
