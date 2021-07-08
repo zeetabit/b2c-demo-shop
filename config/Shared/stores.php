@@ -57,7 +57,7 @@ if (!empty(getenv('SPRYKER_ACTIVE_STORES'))) {
     return $stores;
 }
 
-$stores['DE'] = [
+$stores['NZ'] = [
     // different contexts
     'contexts' => [
         // shared settings for all contexts
@@ -94,24 +94,15 @@ $stores['DE'] = [
     'currencyIsoCodes' => ['EUR', 'CHF'],
     'queuePools' => [
         'synchronizationPool' => [
-            'AT-connection',
-            'DE-connection',
+            'NZ-connection',
+            'AU-connection',
         ],
     ],
-    'storesWithSharedPersistence' => ['AT'],
+    'storesWithSharedPersistence' => ['AU'],
 ];
 
-$stores['AT'] = [
-        'storesWithSharedPersistence' => ['DE'],
-    ] + $stores['DE'];
-
-$stores['US'] = [
-        'queuePools' => [
-            'synchronizationPool' => [
-                'US-connection',
-            ],
-        ],
-        'storesWithSharedPersistence' => [],
-    ] + $stores['DE'];
+$stores['AU'] = [
+        'storesWithSharedPersistence' => ['NZ'],
+    ] + $stores['NZ'];
 
 return $stores;

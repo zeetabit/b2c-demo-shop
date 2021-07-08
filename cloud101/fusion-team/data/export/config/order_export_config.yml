@@ -9,34 +9,34 @@ defaults:
 
 actions:
     - data_entity: order-expense
-      destination: '{data_entity}s_DE_{timestamp}.{extension}'
+      destination: '{data_entity}s_NZ_{timestamp}.{extension}'
       filter_criteria:
           <<: *default_filter_criteria
-          store_name: [DE]
+          store_name: [NZ]
     - data_entity: order-expense
-      destination: '{data_entity}s_AT_{timestamp}.{extension}'
+      destination: '{data_entity}s_AU_{timestamp}.{extension}'
       filter_criteria:
           <<: *default_filter_criteria
-          store_name: [AT]
+          store_name: [AU]
 
     - data_entity: order-item
-      destination: '{data_entity}s_DE_{timestamp}.{extension}'
+      destination: '{data_entity}s_NZ_{timestamp}.{extension}'
       filter_criteria:
           <<: *default_filter_criteria
-          store_name: [DE]
+          store_name: [NZ]
     - data_entity: order-item
-      destination: '{data_entity}s_AT_{timestamp}.{extension}'
+      destination: '{data_entity}s_AU_{timestamp}.{extension}'
       filter_criteria:
           <<: *default_filter_criteria
-          store_name: [AT]
+          store_name: [AU]
 
     - data_entity: order
-      destination: '{data_entity}s_DE_{timestamp}.{extension}'
+      destination: '{data_entity}s_NZ_{timestamp}.{extension}'
       filter_criteria:
           <<: *default_filter_criteria
-          store_name: [DE]
+          store_name: [NZ]
     - data_entity: order
-      destination: '{data_entity}s_AT_{timestamp}.{extension}'
+      destination: '{data_entity}s_AU_{timestamp}.{extension}'
       filter_criteria:
           <<: *default_filter_criteria
-          store_name: [AT]
+          store_name: [AU]
