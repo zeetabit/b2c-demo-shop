@@ -17,7 +17,9 @@ image:
         enabled-extensions:
             - blackfire
             - newrelic
-
+    environment:
+        SPRYKER_DEFAULT_STORE: "NZ"
+        SPRYKER_ACTIVE_STORES: "NZ,AU"
 composer:
     mode: --no-dev
     autoload: --classmap-authoritative
@@ -115,7 +117,7 @@ services:
                 protocol: tcp
     search:
         engine: elastic
-        version: 7.6
+        version: 6.8
         endpoints:
             localhost:9200:
                 protocol: tcp
