@@ -20,6 +20,7 @@ node_modules
 /src/Orm/Zed/*/Persistence/Map
 /src/Orm/Propel/*
 !/src/Orm/Propel/.gitkeep
+!/src/Orm/Propel/Migration_mysql
 
 /src/Generated
 /public/Yves/assets
