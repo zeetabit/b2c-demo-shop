@@ -73,19 +73,15 @@ groups:
                 endpoints:
                     www.nz.fusion.cloud101.cloud.spryker.toys:
                         store: NZ
-                        <<: *frontend-auth
                     www.au.fusion.cloud101.cloud.spryker.toys:
                         store: AU
-                        <<: *frontend-auth
             Zed:
                 application: zed
                 endpoints:
                     zed.nz.fusion.cloud101.cloud.spryker.toys:
                         store: NZ
-                        <<: *frontend-auth
                     zed.au.fusion.cloud101.cloud.spryker.toys:
                         store: AU
-                        <<: *frontend-auth
             Glue:
                 application: glue
                 endpoints:
