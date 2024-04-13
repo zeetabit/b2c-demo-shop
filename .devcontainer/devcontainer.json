@@ -29,7 +29,7 @@
 	// "forwardPorts": []
 
     "initializeCommand": {
-		"host_key": "ssh-keyscan -t rsa,dsa github.com 2>/dev/null",
+		"host_key": "ssh-keyscan -t rsa,dsa github.com",
 		"docker_pull": "bash -c '[[ -d docker ]] || git clone git@github.com:spryker/docker-sdk.git docker'",
 	},
 
