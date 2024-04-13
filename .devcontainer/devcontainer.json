@@ -29,11 +29,12 @@
 	// "forwardPorts": []
 
     "initializeCommand": {
-		"docker_pull": "ssh-keyscan -t rsa,dsa github.com && bash -c '[[ -d docker ]] || git clone git@github.com:spryker/docker-sdk.git docker'",
 	},
 
     //"onCreateCommand": "docker/sdk boot deploy.dev.yml && docker/sdk up -t && docker/sdk stop",
 	"postCreateCommand": {
+		"host_key": "ssh-keyscan -t rsa,dsa github.com",
+		"docker_pull": "bash -c '[[ -d docker ]] || git clone git@github.com:spryker/docker-sdk.git docker'",
 		"boot": "docker/sdk boot deploy.dev.yml",
 		"up": "docker/sdk up -t",
 		"process": "docker/sdk cli -t console q:w:s -s",
