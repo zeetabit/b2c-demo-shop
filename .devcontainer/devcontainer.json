@@ -28,10 +28,17 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": []
 
-    "initializeCommand": "[[ -d docker ]] || git clone git@github.com:spryker/docker-sdk.git docker",
+    "initializeCommand": {
+		"docker_pull": "bash -c '[[ -d docker ]] || git clone git@github.com:spryker/docker-sdk.git docker'",
+	},
 
     //"onCreateCommand": "docker/sdk boot deploy.dev.yml && docker/sdk up -t && docker/sdk stop",
-	"postCreateCommand": "docker/sdk boot deploy.dev.yml && docker/sdk up -t && docker/sdk cli -t console q:w:s -s && docker/sdk stop",
+	"postCreateCommand": {
+		"boot": "docker/sdk boot deploy.dev.yml",
+		"up": "docker/sdk up -t",
+		"process": "docker/sdk cli -t console q:w:s -s",
+		"stop": "docker/sdk stop",
+	},
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "docker/sdk boot deploy.dev.yml && docker/sdk up -t && docker/sdk stop",
