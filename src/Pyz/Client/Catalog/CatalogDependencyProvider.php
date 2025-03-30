@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Client\Catalog;
 
 use Spryker\Client\Catalog\CatalogDependencyProvider as SprykerCatalogDependencyProvider;
@@ -128,21 +130,16 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
     }
 
     /**
-     * @phpstan-return array<\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface>
-     *
      * @return array<\Spryker\Client\Search\Dependency\Plugin\ResultFormatterPluginInterface|\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface>
      */
     protected function createCatalogSearchResultFormatterPlugins(): array
     {
-        /** @phpstan-var \Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface $rawCatalogSearchResultFormatterPlugin */
-        $rawCatalogSearchResultFormatterPlugin = new RawCatalogSearchResultFormatterPlugin();
-
         return [
             new FacetResultFormatterPlugin(),
             new SortedResultFormatterPlugin(),
             new PaginatedResultFormatterPlugin(),
             new CurrencyAwareCatalogSearchResultFormatterPlugin(
-                $rawCatalogSearchResultFormatterPlugin,
+                new RawCatalogSearchResultFormatterPlugin(),
             ),
             new SpellingSuggestionResultFormatterPlugin(),
             new CategoryTreeFilterPageSearchResultFormatterPlugin(),

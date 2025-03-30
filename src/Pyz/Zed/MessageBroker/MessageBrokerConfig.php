@@ -5,9 +5,10 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\MessageBroker;
 
-use Generated\Shared\Transfer\MessageAttributesTransfer;
 use Spryker\Zed\MessageBroker\MessageBrokerConfig as SprykerMessageBrokerConfig;
 
 class MessageBrokerConfig extends SprykerMessageBrokerConfig
@@ -18,27 +19,29 @@ class MessageBrokerConfig extends SprykerMessageBrokerConfig
     public function getDefaultWorkerChannels(): array
     {
         return [
+            'app-events',
             'payment-events',
             'payment-method-commands',
             'asset-commands',
             'product-review-commands',
-            'product-commands',
             'search-commands',
+            'product-commands',
             'tax-commands',
         ];
     }
 
     /**
-     * Defines attributes which should not be logged.
+     * Specification:
+     * - Returns system worker channels used to retrieve service messages.
      *
      * @api
      *
-     * @return array<string>
+     * @return list<string>
      */
-    public function getProtectedMessageAttributes(): array
+    public function getSystemWorkerChannels(): array
     {
         return [
-            MessageAttributesTransfer::AUTHORIZATION,
+            'app-events',
         ];
     }
 }

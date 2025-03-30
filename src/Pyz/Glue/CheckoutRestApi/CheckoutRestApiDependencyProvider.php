@@ -5,10 +5,13 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Glue\CheckoutRestApi;
 
 use Spryker\Glue\CheckoutRestApi\CheckoutRestApiDependencyProvider as SprykerCheckoutRestApiDependencyProvider;
 use Spryker\Glue\CheckoutRestApi\Plugin\SinglePaymentCheckoutRequestAttributesValidatorPlugin;
+use Spryker\Glue\CustomersRestApi\Plugin\CheckoutRestApi\BillingAddressCheckoutRequestAttributesValidatorPlugin;
 use Spryker\Glue\PaymentsRestApi\Plugin\CheckoutRestApi\SelectedPaymentMethodCheckoutDataResponseMapperPlugin;
 use Spryker\Glue\ShipmentsRestApi\Plugin\CheckoutRestApi\AddressSourceCheckoutRequestValidatorPlugin;
 use Spryker\Glue\ShipmentsRestApi\Plugin\CheckoutRestApi\ShipmentDataCheckoutRequestValidatorPlugin;
@@ -22,6 +25,7 @@ class CheckoutRestApiDependencyProvider extends SprykerCheckoutRestApiDependency
     {
         return [
             new SinglePaymentCheckoutRequestAttributesValidatorPlugin(),
+            new BillingAddressCheckoutRequestAttributesValidatorPlugin(),
         ];
     }
 

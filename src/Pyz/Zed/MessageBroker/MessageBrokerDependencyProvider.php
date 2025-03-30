@@ -5,9 +5,13 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\MessageBroker;
 
 use Spryker\Zed\Asset\Communication\Plugin\MessageBroker\AssetMessageHandlerPlugin;
+use Spryker\Zed\KernelApp\Communication\Plugin\MessageBroker\ActiveAppFilterMessageChannelPlugin;
+use Spryker\Zed\KernelApp\Communication\Plugin\MessageBroker\AppConfigMessageHandlerPlugin;
 use Spryker\Zed\MessageBroker\Communication\Plugin\MessageBroker\CorrelationIdMessageAttributeProviderPlugin;
 use Spryker\Zed\MessageBroker\Communication\Plugin\MessageBroker\TenantActorMessageAttributeProviderPlugin;
 use Spryker\Zed\MessageBroker\Communication\Plugin\MessageBroker\TimestampMessageAttributeProviderPlugin;
@@ -17,17 +21,11 @@ use Spryker\Zed\MessageBroker\MessageBrokerDependencyProvider as SprykerMessageB
 use Spryker\Zed\MessageBrokerAws\Communication\Plugin\MessageBroker\Receiver\HttpChannelMessageReceiverPlugin;
 use Spryker\Zed\MessageBrokerAws\Communication\Plugin\MessageBroker\Sender\HttpChannelMessageSenderPlugin;
 use Spryker\Zed\OauthClient\Communication\Plugin\MessageBroker\AccessTokenMessageAttributeProviderPlugin;
-use Spryker\Zed\Payment\Communication\Plugin\MessageBroker\PaymentCancelReservationFailedMessageHandlerPlugin;
-use Spryker\Zed\Payment\Communication\Plugin\MessageBroker\PaymentConfirmationFailedMessageHandlerPlugin;
-use Spryker\Zed\Payment\Communication\Plugin\MessageBroker\PaymentConfirmedMessageHandlerPlugin;
 use Spryker\Zed\Payment\Communication\Plugin\MessageBroker\PaymentMethodMessageHandlerPlugin;
-use Spryker\Zed\Payment\Communication\Plugin\MessageBroker\PaymentPreauthorizationFailedMessageHandlerPlugin;
-use Spryker\Zed\Payment\Communication\Plugin\MessageBroker\PaymentPreauthorizedMessageHandlerPlugin;
-use Spryker\Zed\Payment\Communication\Plugin\MessageBroker\PaymentRefundedMessageHandlerPlugin;
-use Spryker\Zed\Payment\Communication\Plugin\MessageBroker\PaymentRefundFailedMessageHandlerPlugin;
-use Spryker\Zed\Payment\Communication\Plugin\MessageBroker\PaymentReservationCanceledMessageHandlerPlugin;
+use Spryker\Zed\Payment\Communication\Plugin\MessageBroker\PaymentOperationsMessageHandlerPlugin;
 use Spryker\Zed\Product\Communication\Plugin\MessageBroker\ProductExportMessageHandlerPlugin;
 use Spryker\Zed\ProductReview\Communication\Plugin\MessageBroker\ProductReviewAddReviewsMessageHandlerPlugin;
+use Spryker\Zed\SalesPaymentDetail\Communication\Plugin\MessageBroker\SalesPaymentDetailMessageHandlerPlugin;
 use Spryker\Zed\SearchHttp\Communication\Plugin\MessageBroker\SearchEndpointMessageHandlerPlugin;
 use Spryker\Zed\Session\Communication\Plugin\MessageBroker\SessionTrackingIdMessageAttributeProviderPlugin;
 use Spryker\Zed\TaxApp\Communication\Plugin\MessageBroker\TaxAppMessageHandlerPlugin;
@@ -60,20 +58,15 @@ class MessageBrokerDependencyProvider extends SprykerMessageBrokerDependencyProv
     public function getMessageHandlerPlugins(): array
     {
         return [
-            new PaymentCancelReservationFailedMessageHandlerPlugin(),
-            new PaymentConfirmationFailedMessageHandlerPlugin(),
-            new PaymentConfirmedMessageHandlerPlugin(),
-            new PaymentPreauthorizationFailedMessageHandlerPlugin(),
-            new PaymentPreauthorizedMessageHandlerPlugin(),
-            new PaymentReservationCanceledMessageHandlerPlugin(),
-            new PaymentRefundedMessageHandlerPlugin(),
-            new PaymentRefundFailedMessageHandlerPlugin(),
+            new AppConfigMessageHandlerPlugin(),
             new PaymentMethodMessageHandlerPlugin(),
             new AssetMessageHandlerPlugin(),
             new ProductExportMessageHandlerPlugin(),
             new SearchEndpointMessageHandlerPlugin(),
             new ProductReviewAddReviewsMessageHandlerPlugin(),
             new TaxAppMessageHandlerPlugin(),
+            new PaymentOperationsMessageHandlerPlugin(),
+            new SalesPaymentDetailMessageHandlerPlugin(),
         ];
     }
 
@@ -99,6 +92,16 @@ class MessageBrokerDependencyProvider extends SprykerMessageBrokerDependencyProv
     {
         return [
             new ValidationMiddlewarePlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\MessageBrokerExtension\Dependency\Plugin\FilterMessageChannelPluginInterface>
+     */
+    public function getFilterMessageChannelPlugins(): array
+    {
+        return [
+            new ActiveAppFilterMessageChannelPlugin(),
         ];
     }
 }

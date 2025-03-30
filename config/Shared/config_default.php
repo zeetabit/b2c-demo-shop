@@ -1,33 +1,39 @@
 <?php
 
+declare(strict_types = 1);
+
+use Generated\Shared\Transfer\AddPaymentMethodTransfer;
 use Generated\Shared\Transfer\AddReviewsTransfer;
+use Generated\Shared\Transfer\AppConfigUpdatedTransfer;
 use Generated\Shared\Transfer\AssetAddedTransfer;
 use Generated\Shared\Transfer\AssetDeletedTransfer;
 use Generated\Shared\Transfer\AssetUpdatedTransfer;
+use Generated\Shared\Transfer\CancelPaymentTransfer;
+use Generated\Shared\Transfer\CapturePaymentTransfer;
 use Generated\Shared\Transfer\ConfigureTaxAppTransfer;
+use Generated\Shared\Transfer\DeletePaymentMethodTransfer;
 use Generated\Shared\Transfer\DeleteTaxAppTransfer;
 use Generated\Shared\Transfer\InitializeProductExportTransfer;
 use Generated\Shared\Transfer\OrderStatusChangedTransfer;
-use Generated\Shared\Transfer\PaymentCancelReservationFailedTransfer;
-use Generated\Shared\Transfer\PaymentCancelReservationRequestedTransfer;
-use Generated\Shared\Transfer\PaymentConfirmationFailedTransfer;
-use Generated\Shared\Transfer\PaymentConfirmationRequestedTransfer;
-use Generated\Shared\Transfer\PaymentConfirmedTransfer;
-use Generated\Shared\Transfer\PaymentMethodAddedTransfer;
-use Generated\Shared\Transfer\PaymentMethodDeletedTransfer;
-use Generated\Shared\Transfer\PaymentPreauthorizationFailedTransfer;
-use Generated\Shared\Transfer\PaymentPreauthorizedTransfer;
+use Generated\Shared\Transfer\PaymentAuthorizationFailedTransfer;
+use Generated\Shared\Transfer\PaymentAuthorizedTransfer;
+use Generated\Shared\Transfer\PaymentCanceledTransfer;
+use Generated\Shared\Transfer\PaymentCancellationFailedTransfer;
+use Generated\Shared\Transfer\PaymentCapturedTransfer;
+use Generated\Shared\Transfer\PaymentCaptureFailedTransfer;
+use Generated\Shared\Transfer\PaymentCreatedTransfer;
 use Generated\Shared\Transfer\PaymentRefundedTransfer;
 use Generated\Shared\Transfer\PaymentRefundFailedTransfer;
-use Generated\Shared\Transfer\PaymentRefundRequestedTransfer;
-use Generated\Shared\Transfer\PaymentReservationCanceledTransfer;
+use Generated\Shared\Transfer\PaymentUpdatedTransfer;
 use Generated\Shared\Transfer\ProductCreatedTransfer;
 use Generated\Shared\Transfer\ProductDeletedTransfer;
 use Generated\Shared\Transfer\ProductExportedTransfer;
 use Generated\Shared\Transfer\ProductUpdatedTransfer;
+use Generated\Shared\Transfer\RefundPaymentTransfer;
 use Generated\Shared\Transfer\SearchEndpointAvailableTransfer;
 use Generated\Shared\Transfer\SearchEndpointRemovedTransfer;
 use Generated\Shared\Transfer\SubmitPaymentTaxInvoiceTransfer;
+use Generated\Shared\Transfer\UpdatePaymentMethodTransfer;
 use Monolog\Logger;
 use Pyz\Shared\Console\ConsoleConstants;
 use Pyz\Shared\Scheduler\SchedulerConfig;
@@ -36,6 +42,9 @@ use Pyz\Zed\Application\Communication\ZedBootstrap;
 use Pyz\Zed\Oms\OmsConfig;
 use Spryker\Client\RabbitMq\Model\RabbitMqAdapter;
 use Spryker\Glue\Log\Plugin\GlueLoggerConfigPlugin;
+use Spryker\Glue\Log\Plugin\Log\GlueBackendSecurityAuditLoggerConfigPlugin;
+use Spryker\Glue\Log\Plugin\Log\GlueSecurityAuditLoggerConfigPlugin;
+use Spryker\Service\FlysystemAws3v3FileSystem\Plugin\Flysystem\Aws3v3FilesystemBuilderPlugin;
 use Spryker\Service\FlysystemLocalFileSystem\Plugin\Flysystem\LocalFilesystemBuilderPlugin;
 use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants;
@@ -60,6 +69,8 @@ use Spryker\Shared\GlueJsonApiConvention\GlueJsonApiConventionConstants;
 use Spryker\Shared\GlueStorefrontApiApplication\GlueStorefrontApiApplicationConstants;
 use Spryker\Shared\Http\HttpConstants;
 use Spryker\Shared\Kernel\KernelConstants;
+use Spryker\Shared\KernelApp\KernelAppConstants;
+use Spryker\Shared\Locale\LocaleConstants;
 use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\Mail\MailConstants;
 use Spryker\Shared\MessageBroker\MessageBrokerConstants;
@@ -111,7 +122,9 @@ use Spryker\Shared\Testify\TestifyConstants;
 use Spryker\Shared\Translator\TranslatorConstants;
 use Spryker\Shared\User\UserConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
+use Spryker\Yves\Log\Plugin\Log\YvesSecurityAuditLoggerConfigPlugin;
 use Spryker\Yves\Log\Plugin\YvesLoggerConfigPlugin;
+use Spryker\Zed\Log\Communication\Plugin\Log\ZedSecurityAuditLoggerConfigPlugin;
 use Spryker\Zed\Log\Communication\Plugin\ZedLoggerConfigPlugin;
 use Spryker\Zed\MessageBrokerAws\MessageBrokerAwsConfig;
 use Spryker\Zed\OauthAuth0\OauthAuth0Config;
@@ -119,6 +132,9 @@ use Spryker\Zed\Payment\PaymentConfig;
 use Spryker\Zed\Propel\PropelConfig;
 use SprykerShop\Shared\CustomerPage\CustomerPageConstants;
 use SprykerShop\Shared\ShopUi\ShopUiConstants;
+use SprykerShop\Shared\StorageRouter\StorageRouterConstants;
+use SprykerShop\Shared\StoreWidget\StoreWidgetConstants;
+use Symfony\Component\HttpFoundation\Cookie;
 
 // ############################################################################
 // ############################## PRODUCTION CONFIGURATION ####################
@@ -156,6 +172,12 @@ $config[RouterConstants::ZED_SSL_EXCLUDED_ROUTE_NAMES] = [
     'healthCheck' => 'health-check/index',
 ];
 
+$config[RouterConstants::IS_STORE_ROUTING_ENABLED]
+    = $config[StoreWidgetConstants::IS_STORE_ROUTING_ENABLED]
+    = $config[StorageRouterConstants::IS_STORE_ROUTING_ENABLED]
+    = $config[ShopUiConstants::IS_STORE_ROUTING_ENABLED]
+    = $config[LocaleConstants::IS_STORE_ROUTING_ENABLED] = (bool)getenv('SPRYKER_DYNAMIC_STORE_MODE');
+
 // >>> DEV TOOLS
 
 $config[ConsoleConstants::ENABLE_DEVELOPMENT_CONSOLE_COMMANDS] = (bool)getenv('DEVELOPMENT_CONSOLE_COMMANDS');
@@ -186,8 +208,9 @@ $config[MonitoringConstants::IGNORABLE_TRANSACTIONS] = [
 ];
 
 // >>> TESTING
+$isTestifyConstantsClassExists = class_exists(TestifyConstants::class);
 
-if (class_exists(TestifyConstants::class)) {
+if ($isTestifyConstantsClassExists) {
     $config[TestifyConstants::GLUE_OPEN_API_SCHEMA] = APPLICATION_SOURCE_DIR . '/Generated/Glue/Specification/spryker_rest_api.schema.yml';
     $config[TestifyConstants::BOOTSTRAP_CLASS_YVES] = YvesBootstrap::class;
     $config[TestifyConstants::BOOTSTRAP_CLASS_ZED] = ZedBootstrap::class;
@@ -207,6 +230,7 @@ $config[KernelConstants::DOMAIN_WHITELIST] = array_merge($trustedHosts, [
     $sprykerFrontendHost,
     'threedssvc.pay1.de', // trusted Payone domain
     'www.sofort.com', // trusted Payone domain
+    'connect.stripe.com', // trusted Stripe domain
 ]);
 $config[KernelConstants::DOMAIN_WHITELIST][] = '*.bazaarvoice.com';
 
@@ -227,10 +251,13 @@ $config[HttpConstants::ZED_HTTP_STRICT_TRANSPORT_SECURITY_CONFIG]
 
 $config[CustomerConstants::CUSTOMER_SECURED_PATTERN] = '(^/login_check$|^(/en|/de)?/customer($|/)|^(/en|/de)?/wishlist($|/)|^(/en|/de)?/shopping-list($|/)|^(/en|/de)?/quote-request($|/)|^(/en|/de)?/comment($|/)|^(/en|/de)?/company(?!/register)($|/)|^(/en|/de)?/multi-cart($|/)|^(/en|/de)?/shared-cart($|/)|^(/en|/de)?/cart(?!/add)($|/)|^(/en|/de)?/checkout($|/))';
 $config[CustomerConstants::CUSTOMER_ANONYMOUS_PATTERN] = '^/.*';
-$config[CustomerPageConstants::CUSTOMER_REMEMBER_ME_SECRET] = 'hundnase';
+$config[CustomerPageConstants::CUSTOMER_REMEMBER_ME_SECRET] = getenv('SPRYKER_CUSTOMER_REMEMBER_ME_SECRET');
 $config[CustomerPageConstants::CUSTOMER_REMEMBER_ME_LIFETIME] = 31536000;
 
 $config[LogConstants::LOG_SANITIZE_FIELDS] = [
+    'password',
+];
+$config[LogConstants::AUDIT_LOG_SANITIZE_FIELDS] = [
     'password',
 ];
 
@@ -253,7 +280,7 @@ $config[OauthConstants::PUBLIC_KEY_PATH]
         getenv('SPRYKER_OAUTH_KEY_PUBLIC') ?: '',
     ) ?: null;
 $config[OauthConstants::ENCRYPTION_KEY] = getenv('SPRYKER_OAUTH_ENCRYPTION_KEY') ?: null;
-$config[OauthConstants::OAUTH_CLIENT_CONFIGURATION] = json_decode(getenv('SPRYKER_OAUTH_CLIENT_CONFIGURATION'), true) ?: [];
+$config[OauthConstants::OAUTH_CLIENT_CONFIGURATION] = getenv('SPRYKER_OAUTH_CLIENT_CONFIGURATION') ? json_decode(getenv('SPRYKER_OAUTH_CLIENT_CONFIGURATION'), true) : [];
 
 // >> ZED REQUEST
 
@@ -355,7 +382,7 @@ $config[SearchElasticsearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE] = 3;
 
 // >>> STORAGE
 
-$config[StorageConstants::STORAGE_KV_SOURCE] = strtolower(getenv('SPRYKER_KEY_VALUE_STORE_ENGINE')) ?: 'redis';
+$config[StorageConstants::STORAGE_KV_SOURCE] = getenv('SPRYKER_KEY_VALUE_STORE_ENGINE') ? strtolower(getenv('SPRYKER_KEY_VALUE_STORE_ENGINE')) : 'redis';
 $config[StorageRedisConstants::STORAGE_REDIS_PERSISTENT_CONNECTION] = true;
 $config[StorageRedisConstants::STORAGE_REDIS_SCHEME] = getenv('SPRYKER_KEY_VALUE_STORE_PROTOCOL') ?: 'tcp';
 $config[StorageRedisConstants::STORAGE_REDIS_HOST] = getenv('SPRYKER_KEY_VALUE_STORE_HOST');
@@ -391,6 +418,7 @@ $config[SessionConstants::YVES_SESSION_COOKIE_TIME_TO_LIVE] = SessionConfig::SES
 $config[SessionConstants::YVES_SESSION_PERSISTENT_CONNECTION]
     = $config[SessionConstants::ZED_SESSION_PERSISTENT_CONNECTION]
     = true;
+$config[SessionConstants::YVES_SESSION_COOKIE_SAMESITE] = getenv('SPRYKER_YVES_SESSION_COOKIE_SAMESITE') ?: Cookie::SAMESITE_LAX;
 
 // >>> SESSION BACKOFFICE
 
@@ -408,6 +436,7 @@ $config[SessionConstants::ZED_SESSION_TIME_TO_LIVE]
     = $config[SessionRedisConstants::ZED_SESSION_TIME_TO_LIVE]
     = SessionConfig::SESSION_LIFETIME_1_HOUR;
 $config[SessionConstants::ZED_SESSION_COOKIE_TIME_TO_LIVE] = SessionConfig::SESSION_LIFETIME_BROWSER_SESSION;
+$config[SessionConstants::ZED_SESSION_COOKIE_SAMESITE] = getenv('SPRYKER_ZED_SESSION_COOKIE_SAMESITE') ?: Cookie::SAMESITE_STRICT;
 
 // >>> Product Relation
 $config[ProductRelationConstants::PRODUCT_RELATION_READ_CHUNK] = 1000;
@@ -449,6 +478,19 @@ $config[LogConstants::LOGGER_CONFIG] = SprykerLoggerConfig::class;
 $config[LogConstants::LOGGER_CONFIG_ZED] = ZedLoggerConfigPlugin::class;
 $config[LogConstants::LOGGER_CONFIG_YVES] = YvesLoggerConfigPlugin::class;
 $config[LogConstants::LOGGER_CONFIG_GLUE] = GlueLoggerConfigPlugin::class;
+
+$config[LogConstants::AUDIT_LOGGER_CONFIG_PLUGINS_YVES] = [
+    YvesSecurityAuditLoggerConfigPlugin::class,
+];
+$config[LogConstants::AUDIT_LOGGER_CONFIG_PLUGINS_ZED] = [
+    ZedSecurityAuditLoggerConfigPlugin::class,
+];
+$config[LogConstants::AUDIT_LOGGER_CONFIG_PLUGINS_GLUE] = [
+    GlueSecurityAuditLoggerConfigPlugin::class,
+];
+$config[LogConstants::AUDIT_LOGGER_CONFIG_PLUGINS_GLUE_BACKEND] = [
+    GlueBackendSecurityAuditLoggerConfigPlugin::class,
+];
 
 $config[LogConstants::LOG_QUEUE_NAME] = 'log-queue';
 $config[LogConstants::LOG_ERROR_QUEUE_NAME] = 'error-log-queue';
@@ -555,6 +597,19 @@ $config[SymfonyMailerConstants::SMTP_PASSWORD] = getenv('SPRYKER_SMTP_PASSWORD')
 
 // >>> FILESYSTEM
 $config[FileSystemConstants::FILESYSTEM_SERVICE] = [
+    's3-import' => [
+        'sprykerAdapterClass' => Aws3v3FilesystemBuilderPlugin::class,
+        'path' => '/',
+        'key' => '',
+        'secret' => '',
+        'bucket' => '',
+        'region' => '',
+    ],
+    'files-import' => [
+        'sprykerAdapterClass' => LocalFilesystemBuilderPlugin::class,
+        'root' => '/',
+        'path' => '/',
+    ],
     'files' => [
         'sprykerAdapterClass' => LocalFilesystemBuilderPlugin::class,
         'root' => APPLICATION_ROOT_DIR . '/data/DE/media/',
@@ -640,7 +695,7 @@ $config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN]
         $gluePort !== 443 ? ':' . $gluePort : '',
     );
 
-if (class_exists(TestifyConstants::class)) {
+if ($isTestifyConstantsClassExists) {
     $config[TestifyConstants::GLUE_APPLICATION_DOMAIN] = $config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN];
 }
 
@@ -695,29 +750,35 @@ $config[OauthAuth0Constants::AUTH0_CLIENT_ID] = $aopAuthenticationConfiguration[
 $config[OauthAuth0Constants::AUTH0_CLIENT_SECRET] = $aopAuthenticationConfiguration['AUTH0_CLIENT_SECRET'] ?? '';
 
 $config[SearchHttpConstants::TENANT_IDENTIFIER]
+    = $config[KernelAppConstants::TENANT_IDENTIFIER]
     = $config[ProductConstants::TENANT_IDENTIFIER]
     = $config[MessageBrokerConstants::TENANT_IDENTIFIER]
     = $config[MessageBrokerAwsConstants::CONSUMER_ID]
     = $config[OauthClientConstants::TENANT_IDENTIFIER]
     = $config[PaymentConstants::TENANT_IDENTIFIER]
     = $config[AppCatalogGuiConstants::TENANT_IDENTIFIER]
+    = $config[TaxAppConstants::TENANT_IDENTIFIER]
     = getenv('SPRYKER_TENANT_IDENTIFIER') ?: '';
 
 $config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] =
 $config[MessageBrokerAwsConstants::MESSAGE_TO_CHANNEL_MAP] = [
-    PaymentMethodAddedTransfer::class => 'payment-method-commands',
-    PaymentMethodDeletedTransfer::class => 'payment-method-commands',
-    PaymentCancelReservationRequestedTransfer::class => 'payment-commands',
-    PaymentConfirmationRequestedTransfer::class => 'payment-commands',
-    PaymentRefundRequestedTransfer::class => 'payment-commands',
-    PaymentPreauthorizedTransfer::class => 'payment-events',
-    PaymentPreauthorizationFailedTransfer::class => 'payment-events',
-    PaymentConfirmedTransfer::class => 'payment-events',
-    PaymentConfirmationFailedTransfer::class => 'payment-events',
+    AppConfigUpdatedTransfer::class => 'app-events',
+    AddPaymentMethodTransfer::class => 'payment-method-commands',
+    UpdatePaymentMethodTransfer::class => 'payment-method-commands',
+    DeletePaymentMethodTransfer::class => 'payment-method-commands',
+    CancelPaymentTransfer::class => 'payment-commands',
+    CapturePaymentTransfer::class => 'payment-commands',
+    RefundPaymentTransfer::class => 'payment-commands',
+    PaymentAuthorizedTransfer::class => 'payment-events',
+    PaymentAuthorizationFailedTransfer::class => 'payment-events',
+    PaymentCapturedTransfer::class => 'payment-events',
+    PaymentCaptureFailedTransfer::class => 'payment-events',
     PaymentRefundedTransfer::class => 'payment-events',
     PaymentRefundFailedTransfer::class => 'payment-events',
-    PaymentReservationCanceledTransfer::class => 'payment-events',
-    PaymentCancelReservationFailedTransfer::class => 'payment-events',
+    PaymentCanceledTransfer::class => 'payment-events',
+    PaymentCancellationFailedTransfer::class => 'payment-events',
+    PaymentCreatedTransfer::class => 'payment-events',
+    PaymentUpdatedTransfer::class => 'payment-events',
     AssetAddedTransfer::class => 'asset-commands',
     AssetUpdatedTransfer::class => 'asset-commands',
     AssetDeletedTransfer::class => 'asset-commands',
@@ -739,6 +800,7 @@ $config[MessageBrokerConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
     'payment-events' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
     'payment-method-commands' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
     'asset-commands' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
+    'app-events' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
     'product-review-commands' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
     'product-commands' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
     'search-commands' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
@@ -761,24 +823,33 @@ $config[MessageBrokerConstants::IS_ENABLED] = (
     && $config[MessageBrokerAwsConstants::HTTP_CHANNEL_RECEIVER_BASE_URL]
 );
 
+$config[ProductConstants::PUBLISHING_TO_MESSAGE_BROKER_ENABLED] = $config[MessageBrokerConstants::IS_ENABLED];
+
 // ----------------------------------------------------------------------------
 // ------------------------------ OAUTH ---------------------------------------
 // ----------------------------------------------------------------------------
-$config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_MESSAGE_BROKER] = OauthAuth0Config::PROVIDER_NAME;
-$config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_MESSAGE_BROKER] = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
+$config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_MESSAGE_BROKER]
+    = $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_ACP]
+    = $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_PAYMENT_AUTHORIZE]
+    = $config[AppCatalogGuiConstants::OAUTH_PROVIDER_NAME]
+    = $config[TaxAppConstants::OAUTH_PROVIDER_NAME]
+    = OauthAuth0Config::PROVIDER_NAME;
+
+$config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_MESSAGE_BROKER]
+    = $config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_ACP]
+    = $config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_PAYMENT_AUTHORIZE]
+    = $config[TaxAppConstants::OAUTH_GRANT_TYPE]
+    = $config[AppCatalogGuiConstants::OAUTH_GRANT_TYPE]
+    = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
+
+$config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_ACP]
+    = $config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_PAYMENT_AUTHORIZE]
+    = $config[TaxAppConstants::OAUTH_OPTION_AUDIENCE]
+    = 'aop-app';
+
 $config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_MESSAGE_BROKER] = 'aop-event-platform';
 
-$config[AppCatalogGuiConstants::OAUTH_PROVIDER_NAME] = OauthAuth0Config::PROVIDER_NAME;
-$config[AppCatalogGuiConstants::OAUTH_GRANT_TYPE] = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
 $config[AppCatalogGuiConstants::OAUTH_OPTION_AUDIENCE] = 'aop-atrs';
-
-$config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_PAYMENT_AUTHORIZE] = OauthAuth0Config::PROVIDER_NAME;
-$config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_PAYMENT_AUTHORIZE] = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
-$config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_PAYMENT_AUTHORIZE] = 'aop-app';
-
-$config[TaxAppConstants::OAUTH_PROVIDER_NAME] = OauthAuth0Config::PROVIDER_NAME;
-$config[TaxAppConstants::OAUTH_GRANT_TYPE] = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
-$config[TaxAppConstants::OAUTH_OPTION_AUDIENCE] = 'aop-app';
 
 // ----------------------------------------------------------------------------
 // ------------------------------ Product Configuration ---------------------------------------
@@ -791,11 +862,21 @@ $config[KernelConstants::DOMAIN_WHITELIST][] = getenv('SPRYKER_PRODUCT_CONFIGURA
 // ------------------------------ Glue Backend API -------------------------------
 // ----------------------------------------------------------------------------
 $sprykerGlueBackendHost = getenv('SPRYKER_GLUE_BACKEND_HOST');
+$sprykerGlueBackendPort = (int)(getenv('SPRYKER_GLUE_BACKEND_PORT')) ?: 443;
 $config[GlueBackendApiApplicationConstants::GLUE_BACKEND_API_HOST] = $sprykerGlueBackendHost;
 $config[GlueBackendApiApplicationConstants::PROJECT_NAMESPACES] = [
     'Pyz',
 ];
 $config[GlueBackendApiApplicationConstants::GLUE_BACKEND_CORS_ALLOW_ORIGIN] = getenv('SPRYKER_GLUE_APPLICATION_CORS_ALLOW_ORIGIN') ?: '*';
+
+if ($isTestifyConstantsClassExists) {
+    $config[TestifyConstants::GLUE_BACKEND_API_DOMAIN] = sprintf(
+        'https://%s%s',
+        $sprykerGlueBackendHost,
+        $sprykerGlueBackendPort !== 443 ? ':' . $sprykerGlueBackendPort : '',
+    );
+    $config[TestifyConstants::GLUE_BACKEND_API_OPEN_API_SCHEMA] = APPLICATION_SOURCE_DIR . '/Generated/GlueBackend/Specification/spryker_backend_api.schema.yml';
+}
 
 // ----------------------------------------------------------------------------
 // ------------------------------ Glue Storefront API -------------------------------

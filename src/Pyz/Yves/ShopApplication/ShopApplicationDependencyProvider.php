@@ -5,19 +5,22 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Yves\ShopApplication;
 
 use Pyz\Yves\ProductRelationWidget\Widget\UpSellingProductsWidget;
 use Pyz\Yves\ProductReviewWidget\Widget\ProductDetailPageReviewWidget;
 use Pyz\Yves\ProductSetWidget\Widget\ProductSetIdsWidget;
+use Spryker\Yves\CustomerDataChangeRequest\Widget\CustomerEmailChangeRequestWidget;
 use Spryker\Yves\ErrorHandler\Plugin\Application\ErrorHandlerApplicationPlugin;
 use Spryker\Yves\EventDispatcher\Plugin\Application\EventDispatcherApplicationPlugin;
 use Spryker\Yves\Form\Plugin\Application\FormApplicationPlugin;
-use Spryker\Yves\Http\Plugin\Application\HttpApplicationPlugin;
+use Spryker\Yves\Http\Plugin\Application\YvesHttpApplicationPlugin;
 use Spryker\Yves\Locale\Plugin\Application\LocaleApplicationPlugin;
 use Spryker\Yves\Messenger\Plugin\Application\FlashMessengerApplicationPlugin;
 use Spryker\Yves\Router\Plugin\Application\RouterApplicationPlugin;
-use Spryker\Yves\Security\Plugin\Application\SecurityApplicationPlugin;
+use Spryker\Yves\Security\Plugin\Application\YvesSecurityApplicationPlugin;
 use Spryker\Yves\Session\Plugin\Application\SessionApplicationPlugin;
 use Spryker\Yves\Translator\Plugin\Application\TranslatorApplicationPlugin;
 use Spryker\Yves\Twig\Plugin\Application\TwigApplicationPlugin;
@@ -58,6 +61,7 @@ use SprykerShop\Yves\NewsletterWidget\Widget\NewsletterSubscriptionSummaryWidget
 use SprykerShop\Yves\NewsletterWidget\Widget\NewsletterSubscriptionWidget;
 use SprykerShop\Yves\OrderCancelWidget\Widget\OrderCancelButtonWidget;
 use SprykerShop\Yves\OrderCustomReferenceWidget\Widget\OrderCustomReferenceWidget;
+use SprykerShop\Yves\PaymentAppWidget\Widget\ExpressCheckoutPaymentWidget;
 use SprykerShop\Yves\PriceProductVolumeWidget\Widget\CurrentProductPriceVolumeWidget;
 use SprykerShop\Yves\PriceProductWidget\Widget\PriceProductWidget;
 use SprykerShop\Yves\PriceWidget\Widget\PriceModeSwitcherWidget;
@@ -72,6 +76,8 @@ use SprykerShop\Yves\ProductBundleWidget\Widget\ProductBundleMultiCartItemsListW
 use SprykerShop\Yves\ProductBundleWidget\Widget\ProductBundleProductDetailPageItemsListWidget;
 use SprykerShop\Yves\ProductCategoryWidget\Widget\ProductBreadcrumbsWithCategoriesWidget;
 use SprykerShop\Yves\ProductCategoryWidget\Widget\ProductSchemaOrgCategoryWidget;
+use SprykerShop\Yves\ProductComparisonWidget\Widget\ComparisonProductTogglerComparisonListWidget;
+use SprykerShop\Yves\ProductComparisonWidget\Widget\LinkToProductComparisonListWidget;
 use SprykerShop\Yves\ProductConfigurationCartWidget\Widget\ProductConfigurationCartItemDisplayWidget;
 use SprykerShop\Yves\ProductConfigurationCartWidget\Widget\ProductConfigurationCartPageButtonWidget;
 use SprykerShop\Yves\ProductConfigurationCartWidget\Widget\ProductConfigurationQuoteValidatorWidget;
@@ -110,6 +116,7 @@ use SprykerShop\Yves\ShopApplication\ShopApplicationDependencyProvider as Spryke
 use SprykerShop\Yves\StoreWidget\Plugin\ShopApplication\StoreApplicationPlugin;
 use SprykerShop\Yves\StoreWidget\Widget\StoreSwitcherWidget;
 use SprykerShop\Yves\TabsWidget\Widget\FullTextSearchTabsWidget;
+use SprykerShop\Yves\TraceableEventWidget\Widget\TraceableEventWidget;
 use SprykerShop\Yves\WebProfilerWidget\Plugin\Application\WebProfilerApplicationPlugin;
 use SprykerShop\Yves\WishlistWidget\Widget\WishlistMenuItemWidget;
 
@@ -209,6 +216,11 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             ProductConfigurationWishlistPageButtonWidget::class,
             StoreSwitcherWidget::class,
             CartSummaryHideTaxAmountWidget::class,
+            ComparisonProductTogglerComparisonListWidget::class,
+            LinkToProductComparisonListWidget::class,
+            ExpressCheckoutPaymentWidget::class,
+            TraceableEventWidget::class,
+            CustomerEmailChangeRequestWidget::class,
         ];
     }
 
@@ -239,7 +251,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
     protected function getApplicationPlugins(): array
     {
         $applicationPlugins = [
-            new HttpApplicationPlugin(),
+            new YvesHttpApplicationPlugin(),
             new TwigApplicationPlugin(),
             new EventDispatcherApplicationPlugin(),
             new ShopApplicationApplicationPlugin(),
@@ -252,7 +264,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             new FlashMessengerApplicationPlugin(),
             new FormApplicationPlugin(),
             new ValidatorApplicationPlugin(),
-            new SecurityApplicationPlugin(),
+            new YvesSecurityApplicationPlugin(),
             new CustomerConfirmationUserCheckerApplicationPlugin(),
         ];
 

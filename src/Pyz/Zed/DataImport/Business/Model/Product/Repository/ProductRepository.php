@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\Product\Repository;
 
 use Generated\Shared\Transfer\PaginationTransfer;
@@ -44,7 +46,7 @@ class ProductRepository implements ProductRepositoryInterface
      *
      * @return int
      */
-    public function getIdProductByConcreteSku($sku): int
+    public function getIdProductByConcreteSku(string $sku): int
     {
         if (!isset(static::$resolved[$sku])) {
             $this->resolveProductByConcreteSku($sku);
@@ -58,7 +60,7 @@ class ProductRepository implements ProductRepositoryInterface
      *
      * @return string
      */
-    public function getAbstractSkuByConcreteSku($sku): string
+    public function getAbstractSkuByConcreteSku(string $sku): string
     {
         if (!isset(static::$resolved[$sku])) {
             $this->resolveProductByConcreteSku($sku);
@@ -72,7 +74,7 @@ class ProductRepository implements ProductRepositoryInterface
      *
      * @return int
      */
-    public function getIdProductAbstractByAbstractSku($sku): int
+    public function getIdProductAbstractByAbstractSku(string $sku): int
     {
         if (!isset(static::$resolved[$sku])) {
             $this->resolveProductByAbstractSku($sku);
@@ -86,10 +88,12 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function getSkuProductAbstractList(): array
     {
-        return SpyProductAbstractQuery::create()
+        /** @var \Propel\Runtime\Collection\ArrayCollection $productAbstractEntities */
+        $productAbstractEntities = SpyProductAbstractQuery::create()
             ->select([SpyProductAbstractTableMap::COL_SKU])
-            ->find()
-            ->toArray();
+            ->find();
+
+        return $productAbstractEntities->toArray();
     }
 
     /**
@@ -97,10 +101,12 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function getSkuProductConcreteList(): array
     {
-        return SpyProductQuery::create()
+        /** @var \Propel\Runtime\Collection\ArrayCollection $productEntities */
+        $productEntities = SpyProductQuery::create()
             ->select([SpyProductTableMap::COL_SKU])
-            ->find()
-            ->toArray();
+            ->find();
+
+        return $productEntities->toArray();
     }
 
     /**
@@ -116,6 +122,7 @@ class ProductRepository implements ProductRepositoryInterface
 
         $productQuery = $this->applyPagination($productQuery, $paginationTransfer);
 
+        /** @phpstan-var \Propel\Runtime\Collection\ArrayCollection */
         return $productQuery->find();
     }
 
@@ -126,7 +133,7 @@ class ProductRepository implements ProductRepositoryInterface
      *
      * @return void
      */
-    private function resolveProductByConcreteSku($sku): void
+    private function resolveProductByConcreteSku(string $sku): void
     {
         $productEntity = SpyProductQuery::create()
             ->joinWithSpyProductAbstract()
@@ -149,7 +156,7 @@ class ProductRepository implements ProductRepositoryInterface
      *
      * @return void
      */
-    private function resolveProductByAbstractSku($sku): void
+    private function resolveProductByAbstractSku(string $sku): void
     {
         $productAbstractEntity = SpyProductAbstractQuery::create()
             ->findOneBySku($sku);
@@ -181,7 +188,7 @@ class ProductRepository implements ProductRepositoryInterface
      *
      * @return void
      */
-    public function addProductConcrete(SpyProduct $productEntity, $abstractSku = null): void
+    public function addProductConcrete(SpyProduct $productEntity, ?string $abstractSku = null): void
     {
         static::$resolved[$productEntity->getSku()] = [
             static::ID_PRODUCT => $productEntity->getIdProduct(),

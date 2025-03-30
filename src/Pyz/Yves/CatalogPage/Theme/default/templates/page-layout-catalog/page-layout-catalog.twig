@@ -16,6 +16,8 @@
         currentPage: _view.pagination.currentPage,
         maxPage: _view.pagination.maxPage,
     },
+    isAjaxHeader: _view.isMiniCartAsyncModeEnabled | default(false),
+    ajaxCartUrl: '/cart/async/mini-cart-view',
 } %}
 
 {% block container %}
@@ -90,6 +92,7 @@
                                         filteredFacets: data.filteredFacets,
                                         filterPath: data.filterPath,
                                         categories: data.categories,
+                                        isEmptyCategoryFilterValueVisible: data.isEmptyCategoryFilterValueVisible,
                                         togglerClass: 'js-catalog-toggler-click__trigger',
                                         parentJsName: catalogJsName,
                                         numberFormatConfig: numberFormatConfig,
@@ -140,7 +143,12 @@
                                 <div class="grid {% if data.viewMode != 'list' %}grid--stretch product-list{% endif %}">
                                     {% if data.products %}
                                         {% for product in data.products %}
-                                            {% widget 'CatalogPageProductWidget' args [product, data.viewMode] only %}{% endwidget %}
+                                            {% widget 'CatalogPageProductWidget' args [product, data.viewMode] with {
+                                                data: {
+                                                    eventRevealer: data.isAjaxHeader ? 'CART_UPDATE_EVENT' : null,
+                                                },
+                                            } only %}
+                                            {% endwidget %}
                                         {% endfor %}
                                     {% else %}
                                         {% block noResults %}{{ parent() }}{% endblock %}
@@ -194,4 +202,117 @@
 
         </main>
     </div>
+{% endblock %}
+
+{% block eventTracker %}
+    {% set facets = data.filteredFacets is not empty ? data.filteredFacets : data.facets %}
+    {% set events = {
+        list: events.list | merge([{
+            event: 'FILTER_CLICK',
+            name: 'click',
+            triggers: [
+                {
+                    selector: '.filter-section .filter-rating:has(.js-rating-selector__step:focus)',
+                    groupAs: {
+                        key: 'filters',
+                        toArray: true,
+                    },
+                    data: {
+                        name: {
+                            selector: 'self',
+                        },
+                        value: {
+                            selector: '.js-rating-selector__input',
+                            attribute: 'value',
+                        },
+                    },
+                },
+                {
+                    selector: '.filter-section .filter-enumeration .checkbox__container',
+                    groupAs: {
+                        key: 'filters',
+                        toArray: true,
+                    },
+                    data: {
+                        name: {
+                            selector: '.checkbox__input',
+                            attribute: 'name',
+                        },
+                        value: {
+                            selector: '.checkbox__input',
+                            attribute: 'value',
+                        },
+                    },
+                },
+                {
+                    selector: '.filter-section .filter-enumeration .radio__container',
+                    groupAs: {
+                        key: 'filters',
+                        toArray: true,
+                    },
+                    data: {
+                        name: {
+                            selector: '.radio__input',
+                            attribute: 'name',
+                        },
+                        value: {
+                            selector: '.radio__input',
+                            attribute: 'value',
+                        },
+                    },
+                },
+                {
+                    selector: '.filter-category .js-catalog__trigger',
+                    groupAs: {
+                        key: 'filters',
+                        toArray: true,
+                    },
+                    data: {
+                        name: {
+                            value: 'category'
+                        },
+                        value: {
+                            selector: 'self',
+                            attribute: 'data-name',
+                        },
+                    },
+                },
+                {
+                    selector: '.filter-section .color-checkbox__container',
+                    groupAs: {
+                        key: 'filters',
+                        toArray: true,
+                    },
+                    data: {
+                        name: {
+                            selector: '.color-checkbox__input',
+                            attribute: 'name',
+                        },
+                        value: {
+                            selector: '.color-checkbox__input',
+                            attribute: 'value',
+                        },
+                    },
+                },
+            ],
+        }]),
+        data: events.data | merge({
+            page: 'CATALOG',
+            products: data.products | reduce((acc, product) => product.add_to_cart_sku | default
+                    ? acc | merge([{ sku: product.add_to_cart_sku }])
+                    : acc,
+                []
+            ),
+            filters: (data.facets | default([]) | reduce((acc, filter) => filter.activeValue | default
+                    ? acc | merge([{
+                        value: filter.config.name == 'category' ? data.category.name : filter.activeValue,
+                        name: filter.config.name,
+                    }])
+                    : acc,
+                []
+            )),
+        }),
+    } %}
+
+    {{ parent() }}
 {% endblock %}

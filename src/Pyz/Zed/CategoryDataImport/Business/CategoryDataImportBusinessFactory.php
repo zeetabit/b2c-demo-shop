@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\CategoryDataImport\Business;
 
 use Pyz\Zed\CategoryDataImport\Business\Model\CategoryWriterStep;
@@ -33,7 +35,10 @@ class CategoryDataImportBusinessFactory extends SprykerCategoryDataImportBusines
                 CategoryWriterStep::KEY_META_KEYWORDS,
                 CategoryWriterStep::KEY_CATEGORY_IMAGE_NAME,
             ]))
-            ->addStep(new CategoryWriterStep($this->createCategoryRepository()));
+            ->addStep(new CategoryWriterStep(
+                $this->createCategoryRepository(),
+                $this->getUrlFacade(),
+            ));
 
         $dataImporter
             ->addDataSetStepBroker($dataSetStepBroker);

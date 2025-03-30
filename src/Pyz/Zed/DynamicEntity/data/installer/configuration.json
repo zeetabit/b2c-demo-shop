@@ -5,6 +5,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_abstract",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_abstract",
@@ -12,7 +13,9 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_tax_set",
@@ -20,7 +23,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "attributes",
@@ -28,7 +33,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "new_from",
@@ -36,7 +43,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "new_to",
@@ -44,7 +53,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "sku",
@@ -52,7 +63,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "color_code",
@@ -60,10 +73,222 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "productAbstractProducts",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "products"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "productAbstractLocalizedAttributes",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-abstract-localized-attributes"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "productAbstractCategories",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-categories"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "productAbstractUrls",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "urls"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_resource_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "abstractProductAlternatives",
+                "isEditable": true,
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract_alternative",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ],
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-alternatives"
+                }
+            },
+            {
+                "name": "productAbstractStores",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-abstract-stores"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "productImageSets",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-image-sets"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "productAbstractPriceProducts",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "price-products"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "productReviews",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-reviews"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "productAbstractSets",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-abstract-sets"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "productRelations",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-relations"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "productRelationProductAbstracts",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-relations-product-abstract"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "productLabelProductAbstracts",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-label-product-abstracts"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "productAbstractGroups",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-abstract-groups"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "productAbstractProductOptionGroups",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-abstract-product-option-groups"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "productAbstractUrls",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "urls"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_resource_product_abstract",
+                        "parentFieldName": "id_product_abstract"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product",
@@ -71,13 +296,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product",
                     "fieldVisibleName": "id_product",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -86,7 +314,9 @@
                     "type": "integer",
                     "isCreatable": true,
                     "isEditable": true,
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "attributes",
@@ -94,7 +324,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "is_active",
@@ -103,7 +335,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_quantity_splittable",
@@ -111,7 +345,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "sku",
@@ -119,10 +355,157 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "productLocalizedAttributes",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-localized-attributes"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product",
+                        "parentFieldName": "id_product"
+                    }
+                ]
+            },
+            {
+                "name": "productMainBundledProduct",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-bundles"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_bundled_product",
+                        "parentFieldName": "id_product"
+                    }
+                ]
+            },
+            {
+                "name": "productSingleBundledProduct",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-bundles"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product",
+                        "parentFieldName": "id_product"
+                    }
+                ]
+            },
+            {
+                "name": "productImageSets",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-image-sets"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product",
+                        "parentFieldName": "id_product"
+                    }
+                ]
+            },
+            {
+                "name": "productPrices",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "price-products"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product",
+                        "parentFieldName": "id_product"
+                    }
+                ]
+            },
+            {
+                "name": "productAbstractUrls",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "urls"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_resource_product_abstract",
+                        "parentFieldName": "fk_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "productStocks",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "stock-products"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product",
+                        "parentFieldName": "id_product"
+                    }
+                ]
+            },
+            {
+                "name": "productSearch",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-searches"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product",
+                        "parentFieldName": "id_product"
+                    }
+                ]
+            },
+            {
+                "name": "productCategories",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-categories"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_abstract",
+                        "parentFieldName": "fk_product_abstract"
+                    }
+                ]
+            },
+            {
+                "name": "discontinuedProducts",
+                "isEditable": true,
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product",
+                        "parentFieldName": "id_product"
+                    }
+                ],
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "discontinued-products"
+                }
+            },
+            {
+                "name": "productAlternatives",
+                "isEditable": true,
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_concrete_alternative",
+                        "parentFieldName": "id_product"
+                    }
+                ],
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-alternatives"
+                }
+            }
+        ]
     },
     {
         "tableName": "spy_product_abstract_localized_attributes",
@@ -130,13 +513,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_abstract_attributes",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_abstract_attributes",
                     "fieldVisibleName": "id_abstract_attributes",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -145,7 +531,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product_abstract",
@@ -153,7 +541,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "attributes",
@@ -161,7 +551,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "description",
@@ -169,7 +561,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "name",
@@ -177,7 +571,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "meta_description",
@@ -185,7 +581,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "meta_keywords",
@@ -193,7 +591,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "meta_title",
@@ -201,7 +601,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
         }
@@ -212,13 +614,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_category",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_category",
                     "fieldVisibleName": "id_category",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -227,7 +632,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "category_key",
@@ -235,7 +642,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "is_active",
@@ -243,7 +652,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_clickable",
@@ -251,7 +662,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_in_menu",
@@ -259,7 +672,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_active",
@@ -267,7 +682,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_searchable",
@@ -275,10 +692,53 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "categoryNodes",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "category-nodes"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_category",
+                        "parentFieldName": "id_category"
+                    }
+                ]
+            },
+            {
+                "name": "categoryStores",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "category-stores"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_category",
+                        "parentFieldName": "id_category"
+                    }
+                ]
+            },
+            {
+                "name": "categoryAttributes",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "category-attributes"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_category",
+                        "parentFieldName": "id_category"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_category_template",
@@ -286,33 +746,55 @@
         "isActive": true,
         "definition": {
             "identifier": "id_category_template",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_category_template",
                     "fieldVisibleName": "id_category_template",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
                     "fieldName": "name",
                     "fieldVisibleName": "name",
-                    "isCreatable": false,
-                    "isEditable": false,
+                    "isCreatable": true,
+                    "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "template_path",
                     "fieldVisibleName": "template_path",
-                    "isCreatable": false,
-                    "isEditable": false,
+                    "isCreatable": true,
+                    "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "categoryTemplateCategories",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "categories"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_category_template",
+                        "parentFieldName": "id_category_template"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product_category",
@@ -320,13 +802,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_category",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_category",
                     "fieldVisibleName": "id_product_category",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -334,7 +819,9 @@
                     "fieldVisibleName": "fk_category",
                     "isCreatable": true,
                     "isEditable": true,
-                    "validation": { "isRequired": true },
+                    "validation": {
+                        "isRequired": true
+                    },
                     "type": "integer"
                 },
                 {
@@ -343,7 +830,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "product_order",
@@ -351,10 +840,27 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "categories",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "categories"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "id_category",
+                        "parentFieldName": "fk_category"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_url",
@@ -362,6 +868,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_url",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_url",
@@ -380,20 +887,31 @@
                     "validation": { "isRequired": true }
                 },
                 {
-                    "fieldName": "fk_resource_product_abstract",
-                    "fieldVisibleName": "fk_resource_product_abstract",
+                    "fieldName": "url",
+                    "fieldVisibleName": "url",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": {
+                        "isRequired": true,
+                        "constraints": [{ "name": "url" }]
+                    }
+                },
+                {
+                    "fieldName": "fk_resource_product_set",
+                    "fieldVisibleName": "fk_resource_product_set",
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
                     "validation": { "isRequired": false }
                 },
                 {
-                    "fieldName": "url",
-                    "fieldVisibleName": "url",
+                    "fieldName": "fk_resource_product_abstract",
+                    "fieldVisibleName": "fk_resource_product_abstract",
                     "isCreatable": true,
                     "isEditable": true,
-                    "type": "string",
-                    "validation": { "isRequired": true }
+                    "type": "integer",
+                    "validation": { "isRequired": false }
                 }
             ]
         }
@@ -404,13 +922,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_locale",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_locale",
                     "fieldVisibleName": "id_locale",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -419,7 +940,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "is_active",
@@ -427,10 +950,196 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "localeProductAbstractLocalizedAttributes",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-abstract-localized-attributes"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_locale",
+                        "parentFieldName": "id_locale"
+                    }
+                ]
+            },
+            {
+                "name": "localeUrls",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "urls"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_locale",
+                        "parentFieldName": "id_locale"
+                    }
+                ]
+            },
+            {
+                "name": "localeProductLocalizedAttributes",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-localized-attributes"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_locale",
+                        "parentFieldName": "id_locale"
+                    }
+                ]
+            },
+            {
+                "name": "localeStores",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "stores"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_locale",
+                        "parentFieldName": "id_locale"
+                    }
+                ]
+            },
+            {
+                "name": "localeProductImageSets",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-image-sets"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_locale",
+                        "parentFieldName": "id_locale"
+                    }
+                ]
+            },
+            {
+                "name": "localeGlossaryTranslations",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "glossary-translation"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_locale",
+                        "parentFieldName": "id_locale"
+                    }
+                ]
+            },
+            {
+                "name": "localeProductManagementAttributeValueTranslations",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-management-attribute-value-translations"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_locale",
+                        "parentFieldName": "id_locale"
+                    }
+                ]
+            },
+            {
+                "name": "localeProductReviews",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-reviews"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_locale",
+                        "parentFieldName": "id_locale"
+                    }
+                ]
+            },
+            {
+                "name": "localeProductSetDates",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-set-data"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_locale",
+                        "parentFieldName": "id_locale"
+                    }
+                ]
+            },
+            {
+                "name": "localeProductSearches",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-searches"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_locale",
+                        "parentFieldName": "id_locale"
+                    }
+                ]
+            },
+            {
+                "name": "localeCategoryAttributes",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "category-attributes"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_locale",
+                        "parentFieldName": "id_locale"
+                    }
+                ]
+            },
+            {
+                "name": "localeProductLabelLocalizedAttributes",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-labels-localized-attributes"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_locale",
+                        "parentFieldName": "id_locale"
+                    }
+                ]
+            },
+            {
+                "name": "localeSalesOrders",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "sales-orders"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_locale",
+                        "parentFieldName": "id_locale"
+                    }
+                ]
+            },
+            {
+                "name": "localeLocaleStores",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "locale-stores"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_locale",
+                        "parentFieldName": "id_locale"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product_localized_attributes",
@@ -438,13 +1147,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_attributes",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_attributes",
                     "fieldVisibleName": "id_product_attributes",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -453,7 +1165,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product",
@@ -461,7 +1175,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "attributes",
@@ -469,7 +1185,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "description",
@@ -477,7 +1195,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "name",
@@ -485,7 +1205,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -496,6 +1218,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_bundle",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_bundle",
@@ -503,7 +1226,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_bundled_product",
@@ -511,7 +1236,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product",
@@ -519,7 +1246,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "quantity",
@@ -527,7 +1256,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -538,6 +1269,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_abstract_store",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_abstract_store",
@@ -545,7 +1277,9 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_product_abstract",
@@ -553,7 +1287,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_store",
@@ -561,7 +1297,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -572,13 +1310,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_store",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_store",
                     "fieldVisibleName": "id_store",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -587,7 +1328,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_currency",
@@ -595,7 +1338,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "name",
@@ -603,10 +1348,131 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "storeProductAbstractStores",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-abstract-stores"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_store",
+                        "parentFieldName": "id_store"
+                    }
+                ]
+            },
+            {
+                "name": "storeProductOptionValuePrices",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-option-value-prices"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_store",
+                        "parentFieldName": "id_store"
+                    }
+                ]
+            },
+            {
+                "name": "storePriceProducts",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "price-product-stores"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_store",
+                        "parentFieldName": "id_store"
+                    }
+                ]
+            },
+            {
+                "name": "storeAvailabilityAbstracts",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "availability-abstracts"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_store",
+                        "parentFieldName": "id_store"
+                    }
+                ]
+            },
+            {
+                "name": "storeAvailabilities",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "availabilities"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_store",
+                        "parentFieldName": "id_store"
+                    }
+                ]
+            },
+            {
+                "name": "storeCategories",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "category-stores"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_store",
+                        "parentFieldName": "id_store"
+                    }
+                ]
+            },
+            {
+                "name": "storeProductRelations",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-relation-stores"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_store",
+                        "parentFieldName": "id_store"
+                    }
+                ]
+            },
+            {
+                "name": "storeProductLabels",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-label-stores"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_store",
+                        "parentFieldName": "id_store"
+                    }
+                ]
+            },
+            {
+                "name": "storeLocaleStores",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "locale-stores"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_store",
+                        "parentFieldName": "id_store"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product_attribute_key",
@@ -614,6 +1480,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_attribute_key",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_attribute_key",
@@ -621,7 +1488,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_super",
@@ -629,7 +1498,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "key",
@@ -637,10 +1508,53 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "productAttributeKeyProductManagementAttributes",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-management-attributes"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_attribute_key",
+                        "parentFieldName": "id_product_attribute_key"
+                    }
+                ]
+            },
+            {
+                "name": "productAttributeKeySearchAttributes",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-search-attributes"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_attribute_key",
+                        "parentFieldName": "id_product_attribute_key"
+                    }
+                ]
+            },
+            {
+                "name": "productAttributeKeySearchAttributeMaps",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-search-attribute-maps"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_attribute_key",
+                        "parentFieldName": "id_product_attribute_key"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product_group",
@@ -648,6 +1562,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_group",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_group",
@@ -655,7 +1570,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "product_group_key",
@@ -663,10 +1580,27 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "productGroupProductAbstractGroups",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-abstract-groups"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_group",
+                        "parentFieldName": "id_product_group"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product_abstract_group",
@@ -674,6 +1608,7 @@
         "isActive": true,
         "definition": {
             "identifier": "fk_product_abstract",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "fk_product_abstract",
@@ -681,7 +1616,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product_group",
@@ -689,7 +1626,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "position",
@@ -697,7 +1636,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
         }
@@ -708,13 +1649,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_image",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_image",
                     "fieldVisibleName": "id_product_image",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -723,7 +1667,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "external_url_small",
@@ -731,10 +1677,27 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "productImageSetToProductImages",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-image-set-to-product-images"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_image",
+                        "parentFieldName": "id_product_image"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product_image_set",
@@ -742,13 +1705,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_image_set",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_image_set",
                     "fieldVisibleName": "id_product_image_set",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -757,7 +1723,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_product",
@@ -765,7 +1733,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "name",
@@ -773,7 +1743,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_product_abstract",
@@ -781,10 +1753,27 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "productImageSetToProductImages",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-image-set-to-product-images"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_image_set",
+                        "parentFieldName": "id_product_image_set"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product_image_set_to_product_image",
@@ -792,13 +1781,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_image_set_to_product_image",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_image_set_to_product_image",
                     "fieldVisibleName": "id_product_image_set_to_product_image",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -807,7 +1799,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product_image_set",
@@ -815,7 +1809,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "sort_order",
@@ -823,7 +1819,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -834,6 +1832,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_management_attribute",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_management_attribute",
@@ -841,7 +1840,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_product_attribute_key",
@@ -849,7 +1850,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "allow_input",
@@ -857,7 +1860,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "input_type",
@@ -865,10 +1870,27 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "productManagementAttributeValues",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-management-attribute-values"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_management_attribute",
+                        "parentFieldName": "id_product_management_attribute"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product_management_attribute_value",
@@ -876,6 +1898,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_management_attribute_value",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_management_attribute_value",
@@ -883,7 +1906,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_product_management_attribute",
@@ -891,7 +1916,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "value",
@@ -899,10 +1926,27 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "productManagementAttributeValueTranslations",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-management-attribute-value-translations"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_management_attribute_value",
+                        "parentFieldName": "id_product_management_attribute_value"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_glossary_key",
@@ -910,6 +1954,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_glossary_key",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_glossary_key",
@@ -917,7 +1962,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_active",
@@ -925,7 +1972,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "key",
@@ -933,10 +1982,27 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "glossaryKeyGlossaryTranslations",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "glossary-translation"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_glossary_key",
+                        "parentFieldName": "id_glossary_key"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_glossary_translation",
@@ -944,6 +2010,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_glossary_translation",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_glossary_translation",
@@ -951,7 +2018,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_glossary_key",
@@ -959,7 +2028,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_locale",
@@ -967,7 +2038,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "is_active",
@@ -975,7 +2048,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "value",
@@ -983,7 +2058,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -994,6 +2071,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_management_attribute_value_translation",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_management_attribute_value_translation",
@@ -1001,7 +2079,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_locale",
@@ -1009,7 +2089,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product_management_attribute_value",
@@ -1017,7 +2099,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "translation",
@@ -1025,7 +2109,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -1036,6 +2122,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_option_group",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_option_group",
@@ -1043,7 +2130,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_tax_set",
@@ -1051,7 +2140,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "active",
@@ -1059,7 +2150,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "name",
@@ -1067,10 +2160,40 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "productOptionGroupProductOptionValues",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-option-values"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_option_group",
+                        "parentFieldName": "id_product_option_group"
+                    }
+                ]
+            },
+            {
+                "name": "productOptionGroupProductAbstracts",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-abstract-product-option-groups"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_option_group",
+                        "parentFieldName": "id_product_option_group"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product_option_value",
@@ -1078,6 +2201,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_option_value",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_option_value",
@@ -1085,7 +2209,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_product_option_group",
@@ -1093,7 +2219,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "price",
@@ -1101,7 +2229,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "sku",
@@ -1109,7 +2239,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "value",
@@ -1117,10 +2249,27 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "productOptionValuePrices",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-option-value-prices"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_option_value",
+                        "parentFieldName": "id_product_option_value"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product_abstract_product_option_group",
@@ -1128,6 +2277,7 @@
         "isActive": true,
         "definition": {
             "identifier": "fk_product_abstract",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "fk_product_abstract",
@@ -1135,7 +2285,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product_option_group",
@@ -1143,7 +2295,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -1154,6 +2308,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_option_value_price",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_option_value_price",
@@ -1161,7 +2316,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_currency",
@@ -1169,7 +2326,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product_option_value",
@@ -1177,7 +2336,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_store",
@@ -1185,7 +2346,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "gross_price",
@@ -1193,7 +2356,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "net_price",
@@ -1201,7 +2366,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
         }
@@ -1212,6 +2379,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_currency",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_currency",
@@ -1219,7 +2387,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "name",
@@ -1227,7 +2397,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "code",
@@ -1235,7 +2407,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "symbol",
@@ -1243,10 +2417,53 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "currencyStores",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "stores"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_currency",
+                        "parentFieldName": "id_currency"
+                    }
+                ]
+            },
+            {
+                "name": "currencyProductOptionValuePrices",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-option-value-prices"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_currency",
+                        "parentFieldName": "id_currency"
+                    }
+                ]
+            },
+            {
+                "name": "currencyProductPriceStores",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "price-product-stores"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_currency",
+                        "parentFieldName": "id_currency"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_price_type",
@@ -1254,6 +2471,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_price_type",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_price_type",
@@ -1261,7 +2479,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "name",
@@ -1269,7 +2489,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "price_mode_configuration",
@@ -1277,7 +2499,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
         }
@@ -1288,13 +2512,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_price_product",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_price_product",
                     "fieldVisibleName": "id_price_product",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -1303,7 +2530,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product",
@@ -1311,7 +2540,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_product_abstract",
@@ -1319,7 +2550,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "price",
@@ -1327,10 +2560,27 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "priceProductStores",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "price-product-stores"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_price_product",
+                        "parentFieldName": "id_price_product"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_price_product_store",
@@ -1338,13 +2588,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_price_product_store",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_price_product_store",
                     "fieldVisibleName": "id_price_product_store",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -1353,7 +2606,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_price_product",
@@ -1361,7 +2616,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_store",
@@ -1369,7 +2626,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "gross_price",
@@ -1377,7 +2636,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "net_price",
@@ -1385,10 +2646,27 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "priceProductStoreDefaults",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "price-product-defaults"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_price_product_store",
+                        "parentFieldName": "id_price_product_store"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_price_product_default",
@@ -1396,13 +2674,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_price_product_default",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_price_product_default",
                     "fieldVisibleName": "id_price_product_default",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -1411,7 +2692,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -1422,6 +2705,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_review",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_review",
@@ -1429,7 +2713,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_locale",
@@ -1437,7 +2723,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product_abstract",
@@ -1445,7 +2733,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "customer_reference",
@@ -1453,7 +2743,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "description",
@@ -1461,7 +2753,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "nickname",
@@ -1469,7 +2763,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "rating",
@@ -1477,7 +2773,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "status",
@@ -1485,7 +2783,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "summary",
@@ -1493,7 +2793,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
         }
@@ -1504,6 +2806,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_search_attribute",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_search_attribute",
@@ -1511,7 +2814,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_product_attribute_key",
@@ -1519,7 +2824,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "filter_type",
@@ -1527,7 +2834,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "position",
@@ -1535,7 +2844,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "synced",
@@ -1543,7 +2854,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
         }
@@ -1554,6 +2867,7 @@
         "isActive": true,
         "definition": {
             "identifier": "fk_product_attribute_key",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "fk_product_attribute_key",
@@ -1561,7 +2875,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "target_field",
@@ -1569,7 +2885,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "synced",
@@ -1577,7 +2895,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
         }
@@ -1588,6 +2908,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_set",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_set",
@@ -1595,7 +2916,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_active",
@@ -1603,7 +2926,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "product_set_key",
@@ -1611,7 +2936,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "weight",
@@ -1619,10 +2946,66 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "productSetUrls",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "urls"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_resource_product_set",
+                        "parentFieldName": "id_product_set"
+                    }
+                ]
+            },
+            {
+                "name": "productSetProductImageSets",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-image-sets"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_resource_product_set",
+                        "parentFieldName": "id_product_set"
+                    }
+                ]
+            },
+            {
+                "name": "productSetAbstractSets",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-abstract-sets"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_set",
+                        "parentFieldName": "id_product_set"
+                    }
+                ]
+            },
+            {
+                "name": "productSetDates",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-set-data"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_set",
+                        "parentFieldName": "id_product_set"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product_abstract_set",
@@ -1630,6 +3013,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_abstract_set",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_abstract_set",
@@ -1637,7 +3021,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_product_abstract",
@@ -1645,7 +3031,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product_set",
@@ -1653,7 +3041,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "position",
@@ -1661,7 +3051,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -1672,6 +3064,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_set_data",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_set_data",
@@ -1679,7 +3072,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_locale",
@@ -1687,7 +3082,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product_set",
@@ -1695,7 +3092,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "description",
@@ -1703,7 +3102,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "meta_description",
@@ -1711,7 +3112,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "meta_keywords",
@@ -1719,7 +3122,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "meta_title",
@@ -1727,7 +3132,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "name",
@@ -1735,7 +3142,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -1746,13 +3155,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_stock",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_stock",
                     "fieldVisibleName": "id_stock",
                     "isCreatable": true,
                     "isEditable": true,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -1761,7 +3173,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "name",
@@ -1769,7 +3183,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "uuid",
@@ -1777,10 +3193,27 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "stockProducts",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "stock-products"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_stock",
+                        "parentFieldName": "id_stock"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_stock_product",
@@ -1788,13 +3221,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_stock_product",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_stock_product",
                     "fieldVisibleName": "id_stock_product",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -1803,7 +3239,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_stock",
@@ -1811,7 +3249,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "is_never_out_of_stock",
@@ -1819,7 +3259,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "quantity",
@@ -1827,7 +3269,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -1838,6 +3282,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_availability_abstract",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_availability_abstract",
@@ -1845,7 +3290,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_store",
@@ -1853,7 +3300,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "abstract_sku",
@@ -1861,7 +3310,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "quantity",
@@ -1869,10 +3320,27 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "float",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "availabilityAbstractAvailabilities",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "availabilities"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_availability_abstract",
+                        "parentFieldName": "id_availability_abstract"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_availability",
@@ -1880,6 +3348,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_availability",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_availability",
@@ -1887,7 +3356,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_availability_abstract",
@@ -1895,7 +3366,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_store",
@@ -1903,7 +3376,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_never_out_of_stock",
@@ -1911,7 +3386,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "quantity",
@@ -1919,7 +3396,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "float",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "sku",
@@ -1927,7 +3406,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -1938,6 +3419,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_tax_set",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_tax_set",
@@ -1945,7 +3427,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "name",
@@ -1953,7 +3437,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "uuid",
@@ -1961,10 +3447,53 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "taxSetProductAbstracts",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-abstracts"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_tax_set",
+                        "parentFieldName": "id_tax_set"
+                    }
+                ]
+            },
+            {
+                "name": "taxSetProductOptionGroups",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-option-groups"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_tax_set",
+                        "parentFieldName": "id_tax_set"
+                    }
+                ]
+            },
+            {
+                "name": "taxSets",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "tax-set-taxes"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_tax_set",
+                        "parentFieldName": "id_tax_set"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_tax_set_tax",
@@ -1972,6 +3501,7 @@
         "isActive": true,
         "definition": {
             "identifier": "fk_tax_rate",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "fk_tax_rate",
@@ -1979,7 +3509,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_tax_set",
@@ -1987,7 +3519,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -1998,6 +3532,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_tax_rate",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_tax_rate",
@@ -2005,7 +3540,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_country",
@@ -2013,7 +3550,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "name",
@@ -2021,7 +3560,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "rate",
@@ -2029,7 +3570,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "float",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -2040,6 +3583,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_country",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_country",
@@ -2047,7 +3591,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "iso2_code",
@@ -2055,7 +3601,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "iso3_code",
@@ -2063,7 +3611,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "name",
@@ -2071,7 +3621,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "postal_code_mandatory",
@@ -2079,7 +3631,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "postal_code_regex",
@@ -2087,10 +3641,27 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "countryTaxRates",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "tax-rates"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_country",
+                        "parentFieldName": "id_country"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product_search",
@@ -2098,13 +3669,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_search",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_search",
                     "fieldVisibleName": "id_product_search",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -2113,7 +3687,9 @@
                     "type": "integer",
                     "isCreatable": true,
                     "isEditable": true,
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_locale",
@@ -2121,7 +3697,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "is_searchable",
@@ -2129,7 +3707,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -2140,13 +3720,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_category_node",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_category_node",
                     "fieldVisibleName": "id_category_node",
                     "isCreatable": true,
                     "isEditable": true,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -2155,7 +3738,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_parent_category_node",
@@ -2163,7 +3748,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_main",
@@ -2171,7 +3758,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_root",
@@ -2179,7 +3768,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "node_order",
@@ -2187,10 +3778,27 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "categoryNodeParents",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "category-nodes"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_parent_category_node",
+                        "parentFieldName": "id_category_node"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_category_store",
@@ -2198,13 +3806,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_category_store",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_category_store",
                     "fieldVisibleName": "id_category_store",
                     "isCreatable": true,
                     "isEditable": true,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -2213,7 +3824,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_store",
@@ -2221,7 +3834,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -2232,13 +3847,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_category_attribute",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_category_attribute",
                     "fieldVisibleName": "id_category_attribute",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -2247,7 +3865,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_locale",
@@ -2255,7 +3875,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "category_image_name",
@@ -2263,7 +3885,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "name",
@@ -2271,7 +3895,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "meta_description",
@@ -2279,7 +3905,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "meta_keywords",
@@ -2287,7 +3915,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "meta_title",
@@ -2295,7 +3925,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
         }
@@ -2306,13 +3938,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_relation_type",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_relation_type",
                     "fieldVisibleName": "id_product_relation_type",
                     "isCreatable": true,
                     "isEditable": true,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -2321,10 +3956,27 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "productRelationTypeProductRelations",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-relations"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_relation_type",
+                        "parentFieldName": "id_product_relation_type"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product_relation",
@@ -2332,13 +3984,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_relation",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_relation",
                     "fieldVisibleName": "id_product_relation",
                     "isCreatable": true,
                     "isEditable": true,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -2347,7 +4002,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product_relation_type",
@@ -2355,7 +4012,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "is_active",
@@ -2363,7 +4022,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_rebuild_scheduled",
@@ -2371,7 +4032,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "product_relation_key",
@@ -2379,7 +4042,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "query_set_data",
@@ -2387,10 +4052,40 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "productRelationProductAbstracts",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-relations-product-abstract"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_relation",
+                        "parentFieldName": "id_product_relation"
+                    }
+                ]
+            },
+            {
+                "name": "productRelationStores",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-relation-stores"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_relation",
+                        "parentFieldName": "id_product_relation"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product_relation_product_abstract",
@@ -2398,13 +4093,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_relation_product_abstract",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_relation_product_abstract",
                     "fieldVisibleName": "id_product_relation_product_abstract",
                     "isCreatable": true,
                     "isEditable": true,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -2413,7 +4111,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product_relation",
@@ -2421,7 +4121,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "order",
@@ -2429,7 +4131,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
         }
@@ -2440,13 +4144,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_relation_store",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_relation_store",
                     "fieldVisibleName": "id_product_relation_store",
                     "isCreatable": true,
                     "isEditable": true,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -2455,7 +4162,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_store",
@@ -2463,7 +4172,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -2474,13 +4185,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_label",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_label",
                     "fieldVisibleName": "id_product_label",
                     "isCreatable": true,
                     "isEditable": true,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -2489,7 +4203,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_active",
@@ -2497,7 +4213,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_dynamic",
@@ -2505,7 +4223,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_exclusive",
@@ -2513,7 +4233,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_published",
@@ -2521,7 +4243,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "name",
@@ -2529,7 +4253,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "position",
@@ -2537,7 +4263,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "valid_from",
@@ -2545,7 +4273,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "valid_to",
@@ -2553,10 +4283,53 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
-        }
+        },
+        "childRelations": [
+            {
+                "name": "productLabelLocalizedAttributes",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-labels-localized-attributes"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_label",
+                        "parentFieldName": "id_product_label"
+                    }
+                ]
+            },
+            {
+                "name": "productLabelStores",
+                "isEditable": true,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-label-stores"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_label",
+                        "parentFieldName": "id_product_label"
+                    }
+                ]
+            },
+            {
+                "name": "productLabelProductAbstracts",
+                "isEditable": false,
+                "childDynamicEntityConfiguration": {
+                    "tableAlias": "product-label-product-abstracts"
+                },
+                "relationFieldMappings": [
+                    {
+                        "childFieldName": "fk_product_label",
+                        "parentFieldName": "id_product_label"
+                    }
+                ]
+            }
+        ]
     },
     {
         "tableName": "spy_product_label_localized_attributes",
@@ -2564,6 +4337,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_label_localized_attributes",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_label_localized_attributes",
@@ -2571,7 +4345,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_locale",
@@ -2579,7 +4355,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product_label",
@@ -2587,7 +4365,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "name",
@@ -2595,7 +4375,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "string",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -2606,6 +4388,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_label_store",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_label_store",
@@ -2613,7 +4396,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_product_label",
@@ -2621,7 +4406,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_store",
@@ -2629,7 +4416,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -2640,6 +4429,7 @@
         "isActive": true,
         "definition": {
             "identifier": "id_product_label_product_abstract",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_product_label_product_abstract",
@@ -2647,7 +4437,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_product_abstract",
@@ -2655,7 +4447,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_product_label",
@@ -2663,7 +4457,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 }
             ]
         }
@@ -2674,13 +4470,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_sales_order",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_sales_order",
                     "fieldVisibleName": "id_sales_order",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -2689,7 +4488,9 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_sales_order_address_shipping",
@@ -2697,7 +4498,9 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "fk_locale",
@@ -2705,7 +4508,9 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "email",
@@ -2713,7 +4518,9 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "salutation",
@@ -2721,7 +4528,9 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "first_name",
@@ -2729,7 +4538,9 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "last_name",
@@ -2737,7 +4548,9 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "order_reference",
@@ -2745,7 +4558,9 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "price_mode",
@@ -2753,7 +4568,9 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "integer",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "is_test",
@@ -2761,7 +4578,9 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "boolean",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "store",
@@ -2769,7 +4588,9 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "currency_iso_code",
@@ -2777,7 +4598,9 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 },
                 {
                     "fieldName": "created_at",
@@ -2785,7 +4608,9 @@
                     "isCreatable": false,
                     "isEditable": false,
                     "type": "string",
-                    "validation": { "isRequired": false }
+                    "validation": {
+                        "isRequired": false
+                    }
                 }
             ]
         }
@@ -2796,13 +4621,16 @@
         "isActive": true,
         "definition": {
             "identifier": "id_locale_store",
+            "isDeletable": false,
             "fields": [
                 {
                     "fieldName": "id_locale_store",
                     "fieldVisibleName": "id_locale_store",
                     "isCreatable": false,
                     "isEditable": false,
-                    "validation": { "isRequired": false },
+                    "validation": {
+                        "isRequired": false
+                    },
                     "type": "integer"
                 },
                 {
@@ -2811,7 +4639,9 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
-                    "validation": { "isRequired": true }
+                    "validation": {
+                        "isRequired": true
+                    }
                 },
                 {
                     "fieldName": "fk_store",
@@ -2819,6 +4649,467 @@
                     "isCreatable": true,
                     "isEditable": true,
                     "type": "integer",
+                    "validation": {
+                        "isRequired": true
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_currency_store",
+        "tableAlias": "currency-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_currency_store",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_currency_store",
+                    "fieldVisibleName": "id_currency_store",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_currency",
+                    "fieldVisibleName": "fk_currency",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_stock_store",
+        "tableAlias": "stock-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_stock_store",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_stock_store",
+                    "fieldVisibleName": "id_stock_store",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_stock",
+                    "fieldVisibleName": "fk_stock",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_payment_method",
+        "tableAlias": "payment-methods",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_payment_method",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_payment_method",
+                    "fieldVisibleName": "id_payment_method",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "type": "boolean",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "type": "string",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_payment_method_store",
+        "tableAlias": "payment-method-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_payment_method_store",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_payment_method_store",
+                    "fieldVisibleName": "id_payment_method_store",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_payment_method",
+                    "fieldVisibleName": "fk_payment_method",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_shipment_method",
+        "tableAlias": "shipment-methods",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_shipment_method",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_shipment_method",
+                    "fieldVisibleName": "id_shipment_method",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "is_active",
+                    "fieldVisibleName": "is_active",
+                    "type": "boolean",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "type": "string",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_shipment_method_store",
+        "tableAlias": "shipment-method-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_shipment_method_store",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_shipment_method_store",
+                    "fieldVisibleName": "id_shipment_method_store",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_shipment_method",
+                    "fieldVisibleName": "fk_shipment_method",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_country_store",
+        "tableAlias": "country-stores",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_country_store",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_country_store",
+                    "fieldVisibleName": "id_country_store",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_country",
+                    "fieldVisibleName": "fk_country",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_shipment_method_price",
+        "tableAlias": "shipment-method-prices",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_shipment_method_price",
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_shipment_method_price",
+                    "fieldVisibleName": "id_shipment_method_price",
+                    "type": "integer",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": { "isRequired": false }
+                },
+                {
+                    "fieldName": "fk_currency",
+                    "fieldVisibleName": "fk_currency",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_shipment_method",
+                    "fieldVisibleName": "fk_shipment_method",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_store",
+                    "fieldVisibleName": "fk_store",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "default_gross_price",
+                    "fieldVisibleName": "default_gross_price",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "default_net_price",
+                    "fieldVisibleName": "default_net_price",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "uuid",
+                    "fieldVisibleName": "uuid",
+                    "type": "string",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                }
+            ]
+        }
+    },
+    {
+        "tableName": "spy_product_discontinued",
+        "tableAlias": "discontinued-products",
+        "isActive": true,
+        "definition": {
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_product_discontinued",
+                    "fieldVisibleName": "id_product_discontinued",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product",
+                    "fieldVisibleName": "fk_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "active_until",
+                    "fieldVisibleName": "active_until",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "string"
+                },
+                {
+                    "fieldName": "discontinued_on",
+                    "fieldVisibleName": "discontinued_on",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "string"
+                },
+                {
+                    "fieldName": "updated_at",
+                    "fieldVisibleName": "updated_at",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "string"
+                }
+            ],
+            "identifier": "id_product_discontinued"
+        }
+    },
+    {
+        "tableName": "spy_product_alternative",
+        "tableAlias": "product-alternatives",
+        "isActive": true,
+        "definition": {
+            "isDeletable": false,
+            "fields": [
+                {
+                    "fieldName": "id_product_alternative",
+                    "fieldVisibleName": "id_product_alternative",
+                    "isCreatable": false,
+                    "isEditable": false,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product",
+                    "fieldVisibleName": "fk_product",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": true
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_abstract_alternative",
+                    "fieldVisibleName": "fk_product_abstract_alternative",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "integer"
+                },
+                {
+                    "fieldName": "fk_product_concrete_alternative",
+                    "fieldVisibleName": "fk_product_concrete_alternative",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": {
+                        "isRequired": false
+                    },
+                    "type": "integer"
+                }
+            ],
+            "identifier": "id_product_alternative"
+        }
+    },
+    {
+        "tableName": "pyz_example_state_machine_item",
+        "tableAlias": "example-state-machine-items",
+        "isActive": true,
+        "definition": {
+            "identifier": "id_example_state_machine_item",
+            "isDeletable": true,
+            "fields": [
+                {
+                    "fieldName": "id_example_state_machine_item",
+                    "fieldVisibleName": "id_example_state_machine_item",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": false,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "fk_state_machine_item_state",
+                    "fieldVisibleName": "fk_state_machine_item_state",
+                    "type": "integer",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "validation": { "isRequired": true }
+                },
+                {
+                    "fieldName": "name",
+                    "fieldVisibleName": "name",
+                    "type": "string",
+                    "isCreatable": true,
+                    "isEditable": true,
                     "validation": { "isRequired": true }
                 }
             ]

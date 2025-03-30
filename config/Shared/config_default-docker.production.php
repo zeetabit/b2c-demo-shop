@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Monolog\Logger;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Customer\CustomerConstants;
@@ -150,14 +152,14 @@ if (!getenv('SPRYKER_SSL_ENABLE')) {
 // ------------------------------ Twig -----------------------------------------
 // ----------------------------------------------------------------------------
 
-$CURRENT_STORE = Store::getInstance()->getStoreName();
+$CURRENT_CACHE_KEY = !Store::isDynamicStoreMode() ? Store::getInstance()->getStoreName() : getenv('SPRYKER_CURRENT_REGION');
 
 $config[TwigConstants::ZED_TWIG_OPTIONS] = [
     'cache' => new FilesystemCache(
         sprintf(
             '%s/data/%s/cache/Zed/twig',
             APPLICATION_ROOT_DIR,
-            $CURRENT_STORE,
+            $CURRENT_CACHE_KEY,
         ),
         FilesystemCache::FORCE_BYTECODE_INVALIDATION,
     ),
@@ -168,7 +170,7 @@ $config[TwigConstants::YVES_TWIG_OPTIONS] = [
         sprintf(
             '%s/data/%s/cache/Yves/twig',
             APPLICATION_ROOT_DIR,
-            $CURRENT_STORE,
+            $CURRENT_CACHE_KEY,
         ),
         FilesystemCache::FORCE_BYTECODE_INVALIDATION,
     ),

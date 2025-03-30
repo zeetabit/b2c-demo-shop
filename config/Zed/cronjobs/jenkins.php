@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Notes:
  *
@@ -179,6 +181,14 @@ $jobs[] = [
     'command' => '$PHP_BIN vendor/bin/console push-notification:send-push-notifications',
     'schedule' => '* * * * *',
     'enable' => true,
+];
+
+$jobs[] = [
+    'name' => 'sync-order-matrix',
+    'command' => '$PHP_BIN vendor/bin/console order-matrix:sync',
+    'schedule' => '*/1 * * * *',
+    'enable' => true,
+    'global' => true,
 ];
 
 if (getenv('SPRYKER_CURRENT_REGION')) {

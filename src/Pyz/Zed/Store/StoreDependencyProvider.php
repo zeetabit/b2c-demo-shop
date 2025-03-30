@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\Store;
 
 use Spryker\Zed\Country\Communication\Plugin\Store\CountryStoreCollectionExpanderPlugin;
@@ -24,6 +26,11 @@ use Spryker\Zed\Locale\Communication\Plugin\Store\LocaleStorePostCreatePlugin;
 use Spryker\Zed\Locale\Communication\Plugin\Store\LocaleStorePostUpdatePlugin;
 use Spryker\Zed\Search\Communication\Plugin\Store\SearchSetupSourcesStorePostCreatePlugin;
 use Spryker\Zed\Store\StoreDependencyProvider as SprykerStoreDependencyProvider;
+use Spryker\Zed\StoreContext\Communication\Plugin\Store\ContextStoreCollectionExpanderPlugin;
+use Spryker\Zed\StoreContext\Communication\Plugin\Store\ContextStorePostCreatePlugin;
+use Spryker\Zed\StoreContext\Communication\Plugin\Store\ContextStorePostUpdatePlugin;
+use Spryker\Zed\StoreContext\Communication\Plugin\Store\ContextStorePreCreateValidationPlugin;
+use Spryker\Zed\StoreContext\Communication\Plugin\Store\ContextStorePreUpdateValidationPlugin;
 
 class StoreDependencyProvider extends SprykerStoreDependencyProvider
 {
@@ -35,6 +42,7 @@ class StoreDependencyProvider extends SprykerStoreDependencyProvider
         return [
             new DefaultLocaleStorePreCreateValidationPlugin(),
             new DefaultCurrencyStorePreCreateValidationPlugin(),
+            new ContextStorePreCreateValidationPlugin(),
         ];
     }
 
@@ -46,6 +54,7 @@ class StoreDependencyProvider extends SprykerStoreDependencyProvider
         return [
             new DefaultLocaleStorePreUpdateValidationPlugin(),
             new DefaultCurrencyStorePreUpdateValidationPlugin(),
+            new ContextStorePreUpdateValidationPlugin(),
         ];
     }
 
@@ -60,6 +69,7 @@ class StoreDependencyProvider extends SprykerStoreDependencyProvider
             new DefaultLocaleStorePostCreatePlugin(),
             new LocaleStorePostCreatePlugin(),
             new SearchSetupSourcesStorePostCreatePlugin(),
+            new ContextStorePostCreatePlugin(),
         ];
     }
 
@@ -73,6 +83,7 @@ class StoreDependencyProvider extends SprykerStoreDependencyProvider
             new CurrencyStorePostUpdatePlugin(),
             new DefaultLocaleStorePostUpdatePlugin(),
             new LocaleStorePostUpdatePlugin(),
+            new ContextStorePostUpdatePlugin(),
         ];
     }
 
@@ -85,6 +96,7 @@ class StoreDependencyProvider extends SprykerStoreDependencyProvider
             new CountryStoreCollectionExpanderPlugin(),
             new CurrencyStoreCollectionExpanderPlugin(),
             new LocaleStoreCollectionExpanderPlugin(),
+            new ContextStoreCollectionExpanderPlugin(),
         ];
     }
 }

@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\Discount;
 
 use Spryker\Zed\CategoryDiscountConnector\Communication\Plugin\Discount\CategoryDecisionRulePlugin;
@@ -30,6 +32,7 @@ use Spryker\Zed\ProductDiscountConnector\Communication\Plugin\Collector\ProductA
 use Spryker\Zed\ProductDiscountConnector\Communication\Plugin\DecisionRule\ProductAttributeDecisionRulePlugin;
 use Spryker\Zed\ProductLabelDiscountConnector\Communication\Plugin\Discount\ProductLabelDiscountableItemCollectorPlugin;
 use Spryker\Zed\ProductLabelDiscountConnector\Communication\Plugin\Discount\ProductLabelListDecisionRulePlugin;
+use Spryker\Zed\SalesDiscountConnector\Communication\Plugin\Discount\CustomerOrderCountDecisionRulePlugin;
 use Spryker\Zed\SalesQuantity\Communication\Plugin\DiscountExtension\NonSplittableDiscountableItemTransformerStrategyPlugin;
 use Spryker\Zed\ShipmentDiscountConnector\Communication\Plugin\DecisionRule\ShipmentCarrierDecisionRulePlugin;
 use Spryker\Zed\ShipmentDiscountConnector\Communication\Plugin\DecisionRule\ShipmentMethodDecisionRulePlugin;
@@ -54,6 +57,7 @@ class DiscountDependencyProvider extends SprykerDiscountDependencyProvider
             new ProductLabelListDecisionRulePlugin(),
             new ProductAttributeDecisionRulePlugin(),
             new CategoryDecisionRulePlugin(),
+            new CustomerOrderCountDecisionRulePlugin(),
         ]);
     }
 

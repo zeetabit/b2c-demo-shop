@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Glue\GlueApplication;
 
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokenRestRequestValidatorPlugin;
@@ -124,7 +126,10 @@ use Spryker\Glue\OrdersRestApi\Plugin\CustomerOrdersResourceRoutePlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrderItemByResourceIdResourceRelationshipPlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrderRelationshipByOrderReferencePlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrdersResourceRoutePlugin;
+use Spryker\Glue\PaymentsRestApi\Plugin\GlueApplication\PaymentCancellationsResourceRoutePlugin;
+use Spryker\Glue\PaymentsRestApi\Plugin\GlueApplication\PaymentCustomersResourceRoutePlugin;
 use Spryker\Glue\PaymentsRestApi\Plugin\GlueApplication\PaymentMethodsByCheckoutDataResourceRelationshipPlugin;
+use Spryker\Glue\PaymentsRestApi\Plugin\GlueApplication\PaymentsResourceRoutePlugin;
 use Spryker\Glue\ProductAttributesRestApi\Plugin\GlueApplication\ProductManagementAttributesResourceRoutePlugin;
 use Spryker\Glue\ProductAvailabilitiesRestApi\Plugin\AbstractProductAvailabilitiesRoutePlugin;
 use Spryker\Glue\ProductAvailabilitiesRestApi\Plugin\ConcreteProductAvailabilitiesRoutePlugin;
@@ -153,7 +158,6 @@ use Spryker\Glue\ProductPricesRestApi\Plugin\GlueApplication\AbstractProductPric
 use Spryker\Glue\ProductPricesRestApi\Plugin\GlueApplication\ConcreteProductPricesByResourceIdResourceRelationshipPlugin;
 use Spryker\Glue\ProductPricesRestApi\Plugin\GlueApplication\CurrencyParameterValidatorPlugin;
 use Spryker\Glue\ProductPricesRestApi\Plugin\GlueApplication\PriceModeParameterValidatorPlugin;
-use Spryker\Glue\ProductPricesRestApi\Plugin\GlueApplication\SetCurrencyBeforeActionPlugin;
 use Spryker\Glue\ProductPricesRestApi\Plugin\GlueApplication\SetPriceModeBeforeActionPlugin;
 use Spryker\Glue\ProductReviewsRestApi\Plugin\GlueApplication\AbstractProductsProductReviewsResourceRoutePlugin;
 use Spryker\Glue\ProductReviewsRestApi\Plugin\GlueApplication\ProductReviewsRelationshipByProductAbstractSkuPlugin;
@@ -184,8 +188,9 @@ use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\OrderShipmentByOrderRes
 use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\ShipmentMethodsByShipmentResourceRelationshipPlugin;
 use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\ShipmentsByCheckoutDataResourceRelationshipPlugin;
 use Spryker\Glue\ShipmentsRestApi\ShipmentsRestApiConfig;
-use Spryker\Glue\StoresRestApi\Plugin\Application\StoreHttpHeaderApplicationPlugin;
+use Spryker\Glue\StoresApi\Plugin\GlueStorefrontApiApplication\StoreApplicationPlugin;
 use Spryker\Glue\StoresRestApi\Plugin\StoresResourceRoutePlugin;
+use Spryker\Glue\TaxAppRestApi\Plugin\TaxValidateIdResourceRoutePlugin;
 use Spryker\Glue\UpSellingProductsRestApi\Plugin\GlueApplication\CartUpSellingProductsResourceRoutePlugin;
 use Spryker\Glue\UpSellingProductsRestApi\Plugin\GlueApplication\GuestCartUpSellingProductsResourceRoutePlugin;
 use Spryker\Glue\UrlsRestApi\Plugin\GlueApplication\UrlResolverResourceRoutePlugin;
@@ -276,6 +281,10 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new MyAvailabilityNotificationsResourceRoutePlugin(),
             new ConfiguredBundlesResourceRoutePlugin(),
             new GuestConfiguredBundlesResourceRoutePlugin(),
+            new PaymentsResourceRoutePlugin(),
+            new PaymentCancellationsResourceRoutePlugin(),
+            new PaymentCustomersResourceRoutePlugin(),
+            new TaxValidateIdResourceRoutePlugin(),
         ];
     }
 
@@ -403,7 +412,6 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
         return [
             new SetAnonymousCustomerIdControllerBeforeActionPlugin(),
             new SetCustomerBeforeActionPlugin(),
-            new SetCurrencyBeforeActionPlugin(),
             new SetPriceModeBeforeActionPlugin(),
         ];
     }
@@ -697,7 +705,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new EventDispatcherApplicationPlugin(),
             new GlueApplicationApplicationPlugin(),
             new RouterApplicationPlugin(),
-            new StoreHttpHeaderApplicationPlugin(),
+            new StoreApplicationPlugin(),
             new LocaleApplicationPlugin(),
         ];
     }

@@ -5,8 +5,11 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace PyzTest\Glue\Checkout\RestApi\Fixtures;
 
+use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ShipmentMethodTransfer;
@@ -54,6 +57,11 @@ class CheckoutDataRestApiFixtures implements FixturesBuilderInterface, FixturesC
     protected ShipmentMethodTransfer $shipmentMethodTransfer;
 
     /**
+     * @var \Generated\Shared\Transfer\AddressTransfer
+     */
+    protected AddressTransfer $customerAddress;
+
+    /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function getQuoteTransfer(): QuoteTransfer
@@ -75,6 +83,14 @@ class CheckoutDataRestApiFixtures implements FixturesBuilderInterface, FixturesC
     public function getShipmentMethodTransfer(): ShipmentMethodTransfer
     {
         return $this->shipmentMethodTransfer;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\AddressTransfer
+     */
+    public function getCustomerAddress(): AddressTransfer
+    {
+        return $this->customerAddress;
     }
 
     /**
@@ -110,6 +126,11 @@ class CheckoutDataRestApiFixtures implements FixturesBuilderInterface, FixturesC
             $this->customerTransfer,
             [$I->getQuoteItemOverrideData($I->haveProductWithStock(), $this->shipmentMethodTransfer, 10)],
         );
+
+        $this->customerAddress = $I->haveCustomerAddress([
+            AddressTransfer::FK_CUSTOMER => $this->customerTransfer->getIdCustomer(),
+            AddressTransfer::FK_COUNTRY => $I->haveCountry()->getIdCountry(),
+        ]);
 
         return $this;
     }

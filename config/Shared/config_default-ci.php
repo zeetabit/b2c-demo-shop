@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Monolog\Logger;
 use Pyz\Shared\Console\ConsoleConstants;
 use Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants;
@@ -50,9 +52,10 @@ $glueHost = $dynamicStoreEnabled ? 'glue.eu.spryker.test' : 'glue.de.spryker.tes
 $glueBackendHost = $dynamicStoreEnabled ? 'gluebackend.eu.spryker.test' : 'gluebackend.de.spryker.test';
 $glueStorefrontHost = $dynamicStoreEnabled ? 'gluestorefront.eu.spryker.test' : 'gluestorefront.de.spryker.test';
 $backofficeHost = $dynamicStoreEnabled ? 'backoffice.eu.spryker.test' : 'backoffice.de.spryker.test';
-$merchantPortalHost = $dynamicStoreEnabled ? 'mp.eu.spryker.test' : 'mp.de.spryker.test';
 $backendGatewayHost = $dynamicStoreEnabled ? 'backend-gateway.eu.spryker.test' : 'backend-gateway.de.spryker.test';
 $backendApiHost = $dynamicStoreEnabled ? 'backend-api.eu.spryker.test' : 'backend-api.de.spryker.test';
+
+$isTestifyConstantsClassExists = class_exists(TestifyConstants::class);
 
 // ----------------------------------------------------------------------------
 // ------------------------------ CODEBASE ------------------------------------
@@ -256,7 +259,7 @@ $config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN]
         $glueHost,
     );
 
-if (class_exists(TestifyConstants::class)) {
+if ($isTestifyConstantsClassExists) {
     $config[TestifyConstants::GLUE_APPLICATION_DOMAIN] = $config[GlueApplicationConstants::GLUE_APPLICATION_DOMAIN];
 }
 
@@ -292,6 +295,10 @@ $config[GlueBackendApiApplicationConstants::GLUE_BACKEND_API_HOST] = $glueBacken
 $config[GlueBackendApiApplicationConstants::PROJECT_NAMESPACES] = [
     'Pyz',
 ];
+
+if ($isTestifyConstantsClassExists) {
+    $config[TestifyConstants::GLUE_BACKEND_API_DOMAIN] = sprintf('http://%s', $glueBackendHost);
+}
 
 // ----------------------------------------------------------------------------
 // ------------------------------ Glue Storefront API -------------------------------

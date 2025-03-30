@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\ProductConcrete;
 
 use Generated\Shared\Transfer\SpyProductBundleEntityTransfer;
@@ -207,9 +209,13 @@ class ProductConcreteHydratorStep implements DataImportStepInterface
     {
         $productEntityTransfer = new SpyProductEntityTransfer();
         $productEntityTransfer->setSku($dataSet[static::COLUMN_CONCRETE_SKU]);
-        $productEntityTransfer
-            ->setIsActive($dataSet[static::KEY_IS_ACTIVE] ?? true)
-            ->setAttributes(json_encode($dataSet[static::KEY_ATTRIBUTES]));
+        $productEntityTransfer->setIsActive($dataSet[static::KEY_IS_ACTIVE] ?? true);
+
+        $attributes = json_encode($dataSet[static::KEY_ATTRIBUTES]);
+
+        if ($attributes) {
+            $productEntityTransfer->setAttributes($attributes);
+        }
 
         if ($this->isProductColumn(static::COLUMN_IS_QUANTITY_SPLITTABLE)) {
             $isQuantitySplittable = (
@@ -237,8 +243,13 @@ class ProductConcreteHydratorStep implements DataImportStepInterface
                 ->setName($localizedAttributes[static::COLUMN_NAME])
                 ->setDescription($localizedAttributes[static::COLUMN_DESCRIPTION])
                 ->setIsComplete($localizedAttributes[static::KEY_IS_COMPLETE] ?? true)
-                ->setAttributes(json_encode($localizedAttributes[static::KEY_ATTRIBUTES]))
                 ->setFkLocale($idLocale);
+
+            $attributes = json_encode($localizedAttributes[static::KEY_ATTRIBUTES]);
+
+            if ($attributes) {
+                $productLocalizedAttributesEntityTransfer->setAttributes($attributes);
+            }
 
             $productSearchEntityTransfer = new SpyProductSearchEntityTransfer();
             $productSearchEntityTransfer

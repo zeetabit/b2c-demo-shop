@@ -39,6 +39,7 @@
                                     buttonExtraClasses: config.jsName ~ '__ajax-button-add-to-cart js-node-animator__trigger',
                                     isTextHidden: isColorSelectorExist,
                                     extraAttributes: ajaxButtonExtraAttributes,
+                                    eventRevealer: data.eventRevealer,
                                 },
                                 embed: {
                                     ajaxAddToCartExtraClasses: ajaxAddToCartExtraClasses,
@@ -71,7 +72,7 @@
             <div class="{{ config.name }}__review" itemscope itemtype="http://schema.org/AggregateRating" itemprop="aggregateRating">
                 {{ block('rating') }}
             </div>
-
+            <meta class="{{ config.jsName }}__abstract-sku" itemprop="abstractSku" content="{{ data.abstractSku }}">
             <meta class="{{ config.jsName }}__sku" itemprop="sku" content="{{ data.metaSku }}">
         {% endblock %}
     </div>

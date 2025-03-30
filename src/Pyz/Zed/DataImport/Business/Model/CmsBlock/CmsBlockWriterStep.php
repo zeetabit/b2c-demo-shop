@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\DataImport\Business\Model\CmsBlock;
 
 use Orm\Zed\CmsBlock\Persistence\SpyCmsBlock;
@@ -144,6 +146,7 @@ class CmsBlockWriterStep extends PublishAwareStep implements DataImportStepInter
     {
         foreach ($dataSet[LocalizedAttributesExtractorStep::KEY_LOCALIZED_ATTRIBUTES] as $idLocale => $placeholder) {
             foreach ($placeholder as $key => $value) {
+                /** @var string $key */
                 $key = str_replace('placeholder.', '', $key);
                 $keyName = CmsBlockGlossaryKeyGenerator::GENERATED_GLOSSARY_KEY_PREFIX . '.';
                 $keyName .= str_replace([' ', '.'], '-', $dataSet[static::KEY_TEMPLATE_NAME]) . '.';

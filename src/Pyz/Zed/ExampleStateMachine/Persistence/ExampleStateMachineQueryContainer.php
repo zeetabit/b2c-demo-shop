@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\ExampleStateMachine\Persistence;
 
 use Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery;
@@ -26,9 +28,9 @@ class ExampleStateMachineQueryContainer extends AbstractQueryContainer implement
      */
     public function queryStateMachineItemsByStateIds(array $stateIds = []): ExampleStateMachineItemQuery
     {
-          return $this->getFactory()
-              ->createExampleStateMachineQuery()
-              ->filterByFkStateMachineItemState($stateIds, Criteria::IN);
+        return $this->getFactory()
+            ->createExampleStateMachineQuery()
+            ->filterByFkStateMachineItemState($stateIds, Criteria::IN);
     }
 
     /**
@@ -38,9 +40,10 @@ class ExampleStateMachineQueryContainer extends AbstractQueryContainer implement
      */
     public function queryAllStateMachineItems(): ObjectCollection
     {
-         return $this->getFactory()
-             ->createExampleStateMachineQuery()
-             ->find();
+        /** @phpstan-var \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem> */
+        return $this->getFactory()
+            ->createExampleStateMachineQuery()
+            ->find();
     }
 
     /**
@@ -51,7 +54,7 @@ class ExampleStateMachineQueryContainer extends AbstractQueryContainer implement
      * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem>
      */
     public function queryExampleStateMachineItemByIdStateMachineItem(
-        $idStateMachineItem,
+        int $idStateMachineItem,
     ): ExampleStateMachineItemQuery {
         return $this->getFactory()
             ->createExampleStateMachineQuery()

@@ -5,6 +5,8 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types = 1);
+
 namespace Pyz\Zed\Application;
 
 use Spryker\Zed\Application\ApplicationDependencyProvider as SprykerApplicationDependencyProvider;
@@ -24,7 +26,7 @@ use Spryker\Zed\Router\Communication\Plugin\Application\BackendApiRouterApplicat
 use Spryker\Zed\Router\Communication\Plugin\Application\BackendGatewayRouterApplicationPlugin;
 use Spryker\Zed\Router\Communication\Plugin\Application\BackofficeRouterApplicationPlugin;
 use Spryker\Zed\Router\Communication\Plugin\Application\RouterApplicationPlugin;
-use Spryker\Zed\Security\Communication\Plugin\Application\SecurityApplicationPlugin;
+use Spryker\Zed\Security\Communication\Plugin\Application\ZedSecurityApplicationPlugin;
 use Spryker\Zed\Session\Communication\Plugin\Application\MockArraySessionApplicationPlugin;
 use Spryker\Zed\Session\Communication\Plugin\Application\SessionApplicationPlugin;
 use Spryker\Zed\Store\Communication\Plugin\Application\BackofficeStoreApplicationPlugin;
@@ -56,7 +58,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new ErrorHandlerApplicationPlugin(),
             new FormApplicationPlugin(),
             new ValidatorApplicationPlugin(),
-            new SecurityApplicationPlugin(),
+            new ZedSecurityApplicationPlugin(),
             new NumberFormatterApplicationPlugin(),
             new BackofficeStoreApplicationPlugin(),
         ];
@@ -86,7 +88,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new ErrorHandlerApplicationPlugin(),
             new FormApplicationPlugin(),
             new ValidatorApplicationPlugin(),
-            new SecurityApplicationPlugin(),
+            new ZedSecurityApplicationPlugin(),
             new NumberFormatterApplicationPlugin(),
             new BackofficeStoreApplicationPlugin(),
         ];
@@ -103,6 +105,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
     protected function getBackendGatewayApplicationPlugins(): array
     {
         return [
+            new ZedSecurityApplicationPlugin(),
             new BackendGatewayEventDispatcherApplicationPlugin(),
             new RequestBackendGatewayApplicationPlugin(),
             new StoreBackendGatewayApplicationPlugin(),
